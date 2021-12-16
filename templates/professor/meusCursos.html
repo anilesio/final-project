@@ -1,0 +1,70 @@
+{% extends 'base_professor.html' %}
+{% block title %}Cursos registados {% endblock %}
+{% load static %}
+{% block content %}
+
+
+<!-- fim banner inicial -->
+
+
+<div class="container espaco-m-top-1" style="min-height: 100vh;">
+
+  <div class="row">
+    <div class="col s12">
+      <div class="right-align right">
+        <a href="{% url 'professor:novo-curso' %} " class="btn btn-small borda borda-2 z-depth-0"><span class="fa fa-plus"></span> Novo curso</a>
+      </div>
+    </div>
+    <div class="col s12">
+      <h4 class="negrito texto-2">Meus cursos <span class="right texto-0">Total de cursos: {{totalCursos}} </span></h4>
+    </div>
+
+    <div class="col s12 m12 l12">
+      <div class="row">
+        {% if cursos %}
+        {% for item in cursos %}
+        <div class="col s12 m12 l3 m3">
+          <div class="card white z-depth-1">
+              <div class="card-image">
+                  <a href=""> <img src="{% if item.thumb %} {% static item.thumb.url %} {% else %} {% static 'foto.png' %} {% endif %} " style="object-fit: cover; height: 200px;" class=""></a>
+              </div>
+              <div class="card-content black-text" style="padding: 10px;">
+                  <div class="row" style="margin-top: -10px;">
+                      <div class="col s12 m12">
+                          <div class="row">
+                            <div class="col s12 m12 espaco-m-top-1">
+                                <span class="negrito green-text"> {{item.tituloCurso}} </span><br>
+
+                            </div>
+                            <div class="col s12 m12">
+                              {{item.descricao|truncatewords:20}}
+                                <a href="{% url 'professor:detalhes-curso' pk=item.id %} " class="btn borda-3 fundo-4 z-depth-0 col s12 toxto-capitalizado" style="margin-top: 30px; margin-bottom: -25px;">Ver detalhes <span class="fa fa-angle-right"></span></a>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col s12">
+          <div style="border: 1px solid #89d0f1; padding: 5px;" class="blue borda-3 lighten-5">
+            <div class="container center-align">
+                <h5 class="negrito-400"><i class="fa fa-wallet"></i> Nenhum curso registado por enquanto</h5>
+            <p>Os cursos registados aparecem aqui.</p>
+            <p>
+              <a href="{% url 'professor:novo-curso' %} " class="borda-3 btn green">Comece agora</a>
+            </p>
+            </div>
+        </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+{% endblock %}

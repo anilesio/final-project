@@ -1,0 +1,159 @@
+{% extends 'base_estudante.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+  .preparatorio{
+    color: #fafafa;
+    background-color: #9f9f9f;
+  }
+
+  .rodape-pub, footer{
+    display: none;
+  }
+
+  footer{
+    border-top: none;
+  }
+
+  .borda{
+    border: 1px solid #d9d9d9 !important;
+  }
+
+  hr{
+    display: none;
+  }
+  .collection-item{
+    display: inline-block;
+  }
+</style>
+
+<!-- fim banner inicial -->
+<div class="row preparatorio">
+  <div class="col s12 m12 l12">
+    <h4>{{objecto.tituloCurso}} </h4>
+  </div>
+</div>
+<div class="" id="duvidas">
+  <div class="row">
+    <div class="col s12 m12 l4">
+      <div style="max-height: 400px !important; overflow-y: auto;">
+        <div class="hide-on-large-only espaco-p-1">
+          <a href="#modal1" class="negrito z-depth-0 borda-3 green btn-block modal-trigger btn espaco-m-top-1">Ver playlist completa <span class="fa fa-play-circle"></span></a>
+        </div>
+        <div class="hide-on-med-and-down">
+          <h6>Lista de reprodução do curso:</h6>
+            {% for item in videos %}
+          <p class="grey lighten-1 espaco-p-1 "><a href="{% url 'estudante:assistir-curso' pk=item.id %} " class="text-gray negrito">{{forloop.counter}} - {{item.tituloVideo}}  </a></p>
+          <!-- <p class="grey darken-2 espaco-p-1 borda-2-right-top-bottom"><a href="#" class="text-gray">{{forloop.counter}} - {{item.tituloVideo}}  </a></p> -->
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+    <div class="col s12 m12 l8">
+      <div class="borda grey lighten-1" style="padding: 2%;">
+        <output>
+          <video src="{% static videosObjecto.video.url %}" controls="controls" style="width: 100%; height:400px; object-fit: contain;"></video>
+        </output>
+
+      </div>
+      <div class="">
+        <div class="">
+          <p class="espaco-p-1 grey lighten-3">
+            <span class="right-align">
+              Avalie esta aula:
+              <a href=""><span class="badge new red red-text text-darken-4 lighten-4 z-depth-1 borda-right-top-2px z-depth-0" style="margin-left: 0px" data-badge-caption="Não gostei"><i class="fa fa-thumbs-up red-text text-accent-3"></i> </span></a>
+              <a href=""><span class="badge new green green-text text-darken-4 lighten-4 z-depth-1 borda-left-top-2px z-depth-0" data-badge-caption="Gostei da aula"><i class="fa fa-thumbs-down green-text text-accent-3"></i> </span></a>
+            </span>
+          </p>
+      </div>
+        <h5>{{videosObjecto.tituloVideo}} </h5>
+        <p>
+            {{videosObjecto.descricao|safe}}
+        </p>
+        <h6>O professor:</h6>
+        <div class="chip">
+          <img src="{% static 'user.png' %} " alt=""> <span class="texto-capitalizado">  <a href="{%  url 'estudante:perfil-professor' pk=professor.id %} ">{{objecto.user.first_name}} {{objecto.user.last_name}}</span></a>
+        </div>
+      </div>
+      <div class="">
+
+        <div class="borda-top espaco-m-baixo-1">
+        </div>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row espaco-p-baixo-1">
+            <div class="col s12 m10 l10">
+              <label for="id_mensagem" class="texto-0">Digite a sua opinião, dúvida ou outro contributo</label>
+              <!-- <input type="text" name="mensagem" id="id_mensagem" class="espaco-p-2 borda-left-top-2px browser-default estilo-input" placeholder="Seu texto aqui..." required> -->
+              <textarea type="text" name="mensagem" id="id_mensagem" class="espaco-p-2 borda-1 browser-default estilo-input" placeholder="Seu texto aqui..." required rows="6"></textarea>
+            </div>
+
+            <div class="col s12 m2 l2">
+              <label for="id_mensagem" class="texto-0 transparent-text">Enviar</label>
+              <button type="submit" class="btn-block blue-grey btn z-depth-0" style="margin-left: -20px;">Comentar</button>
+            </div>
+          </div>
+        </form>
+
+								<ul class="collection sem-borda">
+                  {% if duvidas %}
+
+                  {% for item in duvidas %}
+                    <div class="">
+                      <li class="collection-item avatar borda-1 grey lighten-4 borda texto-0" style="margin-bottom: 10px;">
+                        <img src="{% static 'user.png' %}" alt="" class="circle">
+                        <span class="grey-text text-darken-2 texto-01 negrito">{{item.transmissor.first_name}} {{item.transmissor.last_name}} {% if item.transmissor == request.user %} <span class="badge blue-grey new" data-badge-caption="autor"></span> <a href="{% url 'estudante:eliminar-duvida' pk=item.id %} " data-position="bottom" data-tolltip-caption="eliminar" class="tooltipped"><span class="badge new grey lighten-4 grey-text text-darken-1" data-badge-caption=""><span class="fa fa-trash"></span></span> </a> {% endif %} </span>
+                        <p class="texto-1"><span class="icon-map-marker"></span> {{item.mensagem}} </p>
+                        <span class="grey-text text-darken-1 texto-00"><span class="fa fa-clock"></span> {{item.dataEnvio}} </span>
+                    </li>
+                    </div>
+
+                {% endfor %}
+                  {% else %}
+                  <div class="">
+                    <h6 class="grey lighten-1 espaco-p-2 texto-2 center grey-text text-darken-4"><span class="texto-3 fa fa-comments "></span> <br> Ainda sem opiniões. <br> Seja o primeiro a expôr algum parecer</h6>
+                  </div>
+                  {% endif %}
+                </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h5 class="negrito">Lista de reprodução</h5>
+    <ul class="collection">
+        {% for item in videos %}
+        <li class="collection-item">
+            <p><a href="" class=" borda-baixo espaco-p-1">{{forloop.counter}}. {{item.tituloVideo}}</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+  </div>
+</div>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+
+</script>
+
+{% endblock %}

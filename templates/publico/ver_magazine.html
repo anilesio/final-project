@@ -1,0 +1,66 @@
+{% extends 'base_publico.html' %} {% block content %} {% load static %}
+
+<style>
+    p {
+        line-height: 25pt;
+    }
+</style>
+
+<!-- banner inicial -->
+<div class="slider">
+    <ul class="slides">
+        <li>
+            <img src="{% static objecto.foto.url %}" class="grey darken-4" style="filter: brightness(70%); object-fit: cover;">
+            <div class="caption center-align">
+                <h3 class="">{{objecto.titulo_magazine}} </h3>
+                <h6 class="texto-uppercase texto-0 negrito">por {{objecto.usuario}} - {{objecto.data_criacao}} </h6>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- fim banner inicial -->
+
+<section style="min-height: 100vh">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l8">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div class="card z-depth-0">
+                            <div class="card-content texto-justificado">
+                                <h4 class="negrito deep-purple-text text-darken-1">{{objecto.titulo_magazine}} </h4>
+                                <p>{{objecto.corpo_magazine|safe}} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l4">
+                <div class="row">
+                    <div class="col s12 m12 s12">
+                        <div class="input-field">
+                            <input type="text" id="txt-localizacao" class="col s12 m6 l10 browser-default estilo-input" style="border-radius: 50px 0 0 50px;" placeholder="Pesquise aqui...">
+                        </div>
+                        <div class="input-field">
+                            <button class="btn z-depth-0 btn-nz-p col s12 m6 l2" style="border-radius: 0 50px 50px 0; margin-left: -5px; margin-top: 10px; height: 42px; line-height: 0px;"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m12 s12">
+                        <h6 class="grey-text text-darken-2 collection-header negrito texto-1">Veja mais notícias sobre <span class="titulo-4">{{categoria.titulo}}</span> </h6>
+                        <hr>
+                        <div class="collection with-header sem-borda">
+                            {% for item in artigos %}
+                            <a href="{% url 'website:ver_magazine' pk=item.id %}" class="grey-text text-darken-4 grey lighten-5 collection-item"> {{item.titulo_magazine}} </a> {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- fim conteudo -->
+
+{% endblock %}

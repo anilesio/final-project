@@ -1,0 +1,346 @@
+{% extends 'base_publico.html' %}
+{% load static %}
+{% block title %}Central de ajuda {% endblock %}
+{% block content %}
+
+<style>
+    .collapsible li{
+        background-color: #fff !important;
+    }
+    .corpo{
+        background: url('../../static/banner.png') no-repeat;
+        background-size: cover;
+        padding: 20px;
+        margin-top: -40px;
+    }
+
+    .cartao{
+        border: 1px solid #e04050;
+        background-color: #fff !important;
+    }
+
+    .hover-top{
+        transform: scale(0.8);
+        transition: all 0.3s;
+    }
+
+    .hover-top:hover{
+        transform: scale(0.9);
+        border: 2px solid #e04050;
+    }
+    
+</style>
+
+ <!-- banner inicial -->
+ <div class="slider">
+    <ul class="slides">
+        <li>
+            <img src="{% static 'publico/img/banner/7.png' %}" style="filter: brightness(70%);">
+            <div class="caption center-align">
+                <h3 class="">Bem-vindo(a) <br> a nossa Central de ajuda </h3>
+                <!-- <h6>Ofereça quartos e moradias para alugar com segurança e inteligência</h6> -->
+                <!-- <h5 class=""><a href="{% url 'accounts:sign_tipo_anfitriao' %}" class="negrito z-depth-0 fundo-4 btn">Criar conta agora</a> <h5> -->
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- fim banner inicial -->
+    <div class="content">
+        <section class="corpo">
+            <div class="container">
+                <div class="row espaco-m-top-1">
+                    <div class="col s12">
+                        <h3 class="negrito titulo-4 titulo-0">Seleccione um item:</h3>
+                    </div>
+                    {% for item in tipo_artigo %}
+                    <div class="col s12 m4 l3">
+                        <div class="cartao hover-top">
+                            <a href="{% url 'website:artigos' item.pk %}">
+                                <div class="espaco-m-baixo-2 espaco-m-top-2 center">
+                                        <img src="{% static item.icone.url %}" style="padding: 5px; border-radius: 3px; border: 2px solid #e04050;" alt="">
+                                    <h6 class="titulo-4 negrito">{{item.titulo}} </h6>
+                                    <!-- <span class="titulo-4">8 artigos</span> -->
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="row espaco-m-baixo-1 espaco-m-top-1">
+                    <div class="center col s12 m12 l8 offset-l2">
+                        <h4 class="negrito titulo-4">Perfuntas frequentes:</h4>
+                    </div>
+                </div>
+                <div class="row espaco-m-baixo-1 espaco-m-top-1">
+                    <div class="col s12 m6">
+                        <ul class="collapsible popout z-depth-0">
+                            <li class="sem-borda">
+                                <div class="collapsible-header hoverable">
+                                    Como entrar em contato com pessoas que estão a oferecer quartos para alugar?</div>
+                                <div class="collapsible-body">
+                                    <p><span class="negrito red-text">Aviso:</span> Para proteger seu pagamento, nunca
+                                        transfira dinheiro antes de visitar o local e comprovar a veracidade do anúncio
+                                        se comunique fora do site Nzoami.</p>
+                                    <p>Se você não criou seu perfil, vá em Meu Perfil > Completar meu perfil.</p>
+                                    <p>Preencha o formulário adequadamente e clique em Concluir Perfil.</p>
+                                    <p>Com o perfil criado, siga os passos abaixo:</p>
+
+                                    <ul class="browser-default">
+                                        <li>Na Página Inicial, vá em Meu Perfil.</li>
+                                        <li>Clique em Ver lugares compatíveis.</li>
+                                        <li>No anúncio escolhido, clique em Ver Detalhes.</li>
+                                        <li>Vá em Enviar Mensagem, digite a mensagem e clique em Enviar Mensagem.</li>
+                                        <li>Caso você queira entrar em contato por telefone, clique em Ver telefones e
+                                            não se esqueça de dizer que conseguiu o número pelo Nzoami.</li>
+                                    </ul>
+
+                                    <p>Ou você pode ir na Página Inicial e clicar em Procurar.</p>
+
+                                    <p>Digite a cidade que você deseja morar, no anúncio escolhido, clique em Ver
+                                        Detalhes, veja as informações sobre o quarto e anunciante e envie uma mensagem
+                                        ou entre em contato por telefone.</p>
+                                    <hr>
+                                    <span class="right blue-text text-accent-2" style="font-size: 8pt;">Actualizado em
+                                        30 de
+                                        Julho de 2020</span>
+                                </div>
+                            </li>
+                            <li class="sem-borda">
+                                <div class="collapsible-header hoverable">
+                                    Como notar alguma tentativa de burla?
+                                </div>
+                                <div class="collapsible-body">
+                                    <p>Nós do Nzoami fazemos o possível para evitar que pessoas com intenções
+                                        maliciosas possam tirar vantagem de nossa plataforma para aplicar golpes em quem
+                                        está buscando um local para morar. No entanto, é sempre importante que você haja
+                                        com cuidado ao negociar com qualquer pessoa pela Internet. Principalmente se
+                                        tratando de alguém que você ainda não conhece. Veja algumas dicas de atitudes
+                                        que você pode tomar para saber se alguém pode estar tentando te aplicar um
+                                        golpe.</p>
+
+                                    <ul class="browser-default">
+                                        <li>Você pode conversar com um anfitrião que afirme que está "viajando" ou "fora
+                                            da cidade" por motivos diversos. Caso essa pessoa te peça que você envie
+                                            valor como um "adiantamento" ou "depósito" adiantado pelo aluguel. Nunca
+                                            pague nada antes que você veja o local e possa conversar pessoalmente com o
+                                            anunciante de quartos do Nzoami.</li>
+                                        <li>A pessoa não aceita que vocẽ faça uma visita antes de realizar o pagamento.
+                                        </li>
+                                        <li>O anunciante não possui uma conta verificada no Nzoami.</li>
+                                        <li>A pessoa não se comunica com clareza, e comete muitos erros de ortografia.
+                                            (Sempre recomendamos a todos os nossos anfitriões que sejam o mais claros e
+                                            amigáveis em seu contato com roommates no Nzoami).</li>
+                                        <li>O anfitrião te solicita informações pessoais (CPF, RG), mais fotos suas
+                                            (sugerimos que você inclua uma foto de si mesmo em seu perfil, mas desconfie
+                                            caso algum anfitrião insista por mais fotos de você), ou informações
+                                            bancárias antes mesmo que você tenham entrado em acordo pelo aluguel.</li>
+                                    </ul>
+                                    <p>Caso você desconfie que uma pessoa pode estar com intenções fraudulentas pelo Meu
+                                        Kubico, pedimos que você bloqueie esta pessoa e denuncie seu anúncio, para que
+                                        nossa equipe possa verificar a situação e o remover de nossa comunidade, se for
+                                        o caso. </p>
+                                    <hr>
+                                    <span class="right blue-text text-accent-2" style="font-size: 8pt;">Actualizado em
+                                        30 de
+                                        Julho de 2020</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header hoverable">
+                                    Como posso excluir minha conta do Nzoami?
+                                </div>
+                                <div class="collapsible-body">
+                                    <p>Você pode remover sua conta do Nzoami a qualquer momento. Caso você ainda
+                                        esteja querendo procurar ou oferecer um lugar para alugar, mas está tendo
+                                        problemas para fazê-lo no Nzoami, podemos tentar te ajudar com isso. Basta
+                                        entrar em contato conosco e tentaremos te ajudar da melhor forma possível. Se
+                                        ainda prefere excluir sua conta, esperamos que tenhamos te ajudado neste tempo
+                                        que você esteve conosco.</p>
+                                    <p>Siga os passos abaixo para excluir sua conta do Nzoami:</p>
+
+                                    <span class="red-text">Falta informação</span>
+                                    <hr>
+                                    <span class="right blue-text text-accent-2" style="font-size: 8pt;">Actualizado em
+                                        30 de
+                                        Julho de 2020</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="collapsible-header hoverable">
+                                    Quanto custa para usar o Nzoami?
+                                </div>
+                                <div class="collapsible-body">
+                                    <p class="red-text">Falta informação</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col s12 m6">
+                        <ul class="collapsible popout z-depth-0">
+                            <li>
+                                <div class="collapsible-header hoverable">
+                                    Quais medidas de segurança devo tomar ao alugar um quarto?
+                                </div>
+                                <div class="collapsible-body"><span>
+                                        <p class="negrito">Veja algumas dicas que te damos para que você possa alugar um
+                                            quarto
+                                            com mais segurança. </p>
+                                        <ul class="browser-default">
+                                            <li>Quando for visitar o local, tente ir acompanhado de alguém de sua
+                                                confiança;
+                                            </li>
+                                            <li>Pegue todas as informações sobre o valor do aluguel e demais gastos do
+                                                imóvel;
+                                            </li>
+                                            <li>Coloque todos os termos do aluguel em um contrato, assim tanto o
+                                                anfitrião como
+                                                o locatário
+                                                estarão protegidos.</li>
+                                        </ul>
+                                        <hr>
+                                        <span class="right blue-text text-accent-2" style="font-size: 8pt;">Actualizado
+                                            em 30 de
+                                            Julho de 2020</span>
+                                    </span></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header hoverable">
+                                    Como combinar uma visita a um quarto ou apartamento de forma segura?
+                                </div>
+                                <div class="collapsible-body">
+                                    <p>Quando você combinar uma visita ao imóvel que está anunciado no Nzoami, tente
+                                        seguir essas dicas, para que você possa ter mais segurança na hora da visita.
+                                    </p>
+
+                                    <ul class="browser-default">
+                                        <li>Avalie bem a pessoa pelo site. Peça referências, informações sobre o bairro,
+                                            sobre o imóvel, etc;</li>
+                                        <li>Nunca visite um imóvel sem antes ter visto fotos do local. Peça para que o
+                                            anfitrião inclua fotos do imóvel para que você possa ver se o local te
+                                            agrada realmente;</li>
+                                        <li>Peça também para que seu anfitrião inclua uma foto pessoal em seu perfil do
+                                            Nzoami;</li>
+                                        <li>Tente ir acompanhado de alguém de sua confiança. Caso isso não seja
+                                            possível, avise a algum conhecido sobre a visita que você vai fazer ao
+                                            imóvel em questão.</li>
+                                    </ul>
+                                    <p>Caso você goste do local, e queira confirmar o aluguel, a nossa recomendação é
+                                        que você peça
+                                        para realizar o pagamento do primeiro aluguel através da reserva segura do Meu
+                                        Kubico. Dessa
+                                        forma, você tem a segurança de saber que o pagamento apenas será transferido
+                                        para seu
+                                        anfitrião após você confirmar a mudança. Você também tem a opção de revisar o
+                                        local por 24
+                                        horas após a mudança, e nos reportar caso o o imóvel não esteja de acordo com o
+                                        anunciado,
+                                        ou caso o anfitrião defina regras que não haviam sido combinadas antes.</p>
+                                    <hr>
+                                    <span class="right blue-text text-accent-2" style="font-size: 8pt;">Actualizado em
+                                        30 de
+                                        Julho de 2020</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="collapsible-header hoverable">
+                                    Como atualizar informações de minha conta?
+
+                                </div>
+                                <div class="collapsible-body">
+                                    <p>
+                                        Você pode alterar informações de sua conta como nome, e-mail, data de
+                                        nascimento, etc a
+                                        qualquer momento em sua conta. Siga os passos abaixo para alterar estas e outras
+                                        informações
+                                        em sua conta.
+                                    </p>
+
+                                    <ul class="browser-default">
+                                        <li>Após fazer login em sua conta do Nzoami e estiver no seu perfil, clique
+                                            no
+                                            avatar ou foto que você vê no topo esquerdo.</li>
+                                        <li>Ou ainda, pode passar o mouse (clique, se estiver a usar um dispositivo
+                                            móvel), no
+                                            botão no canto inferior direito</span></li>
+                                        <li>Preencha as informações que você deseja alterar em sua conta, e em seguida
+                                            clique no
+                                            botão</li>
+                                        <li><span class="negrito">Salvar</span>, para salvar as alterações.</li>
+                                    </ul>
+
+                                    <hr>
+                                    <span class="right blue-text text-accent-2" style="font-size: 8pt;">Actualizado em
+                                        30 de
+                                        Julho de 2020</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header hoverable">
+                                    Como posso saber se um anúncio publicado no Nzoami é realmente confiável?
+                                </div>
+                                <div class="collapsible-body">
+                                    <p>
+                                        Nós prezamos por sua segurança enquanto se comunica com pessoas oferecendo um
+                                        buscando
+                                        um quarto para alugar no Nzoami. No entanto, é sempre importante se manter
+                                        atento a
+                                        comportamentos duvidosos, antes de marcar uma visita, ou fechar um aluguel. Siga
+                                        nossas
+                                        dicas para saber se um anúncio publicado no Nzoami é realmente confiável:
+                                    </p>
+
+                                    <ul class="browser-default">
+                                        <li> Verifique se o anunciante incluiu fotos em seu anúncio; </li>
+                                        <li> Veja se o preço do aluguel não está alto ou baixo demais; </li>
+                                        <li> Desconfie se a pessoa pedir informações pessoais antes mesmo de marcarem a
+                                            visita
+                                            no lugar; </li>
+                                        <li> Desconfie, também, se o anunciante estiver pedindo um depósito adiantado
+                                            antes
+                                            mesmo de fecharem o contrato; </li>
+                                        <li> Verifique se a pessoa possui uma foto de perfil. </li>
+                                    </ul>
+                                    <hr>
+                                    <span class="right blue-text text-accent-2" style="font-size: 8pt;">Actualizado em
+                                        30 de
+                                        Julho de 2020</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        var elem = document.querySelector('.collapsible.expandable');
+        var instance = M.Collapsible.init(elem, {
+            accordion: false
+        });
+
+    </script>
+
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,133 @@
+	{% extends 'base_professor.html' %}
+	{% load static %}
+	{% block title %} Página inicial {% endblock %}
+	{% block content %}
+
+	<!-- fim banner inicial -->
+
+<section style="min-height: 100vh;">
+	<section class="">
+		<div class="container">
+
+			<div class="row espaco-p-top-1 ">
+				<div class="col s12 m4 l4">
+					<div class="espaco-p-1 fundoEscuro borda-2">
+						<div class="espaco-m-left-1">
+							<h6 class="">Cursos ministrados</h6>
+							<div class="borda-titulo-0"></div>
+							<span class="texto-3"><span class="blue-text">0x</span> <span class="fa fa-book texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 m4 l4">
+					<div class="espaco-p-1 fundoEscuro borda-2">
+						<div class="espaco-m-left-1">
+							<h6 class="">Total de alunos</h6>
+							<div class="borda-titulo-0"></div>
+							<span class="texto-3"><span class="blue-text">0x</span> <span class="fa fa-users texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+						</div>
+					</div>
+				</div>
+
+				<div class="col s12 m4 l4">
+					<div class="espaco-p-1 fundoEscuro borda-2">
+						<div class="espaco-m-left-1">
+							<h6 class="">Mensagens </h6>
+							<div class="borda-titulo-0"></div>
+							<span class="texto-3"><span class="blue-text">0x </span>  <span class="fa fa-envelope texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+							<span class="texto-00"><a href="" class="grey-text">1 | novo <span class="fa fa-star yellow-text text-darken-2"></span></a></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="container espaco-m-top-1">
+
+		<div class="row">
+			<div class="col s12 m12 l12">
+				<div class="row">
+				  {% if cursos %}
+				  {% for item in cursos %}
+				  <div class="col s12 m12 l3 m3">
+					<div class="card white z-depth-1">
+						<div class="card-image">
+							<a href=""> <img src="{% if item.thumb %} {% static item.thumb.url %} {% else %} {% static 'foto.png' %} {% endif %} " style="object-fit: cover; height: 200px;" class=""></a>
+						</div>
+						<div class="card-content black-text" style="padding: 10px;">
+							<div class="row" style="margin-top: -10px;">
+								<div class="col s12 m12">
+									<div class="row">
+									  <div class="col s12 m12">
+										  <span class="negrito green-text"> {{item.tituloCurso}} </span><br>
+
+									  </div>
+									  <div class="col s12 m12">
+										{{item.descricao|truncatewords:20}}
+										  <a href="{% url 'professor:detalhes-curso' pk=item.id %} " class="btn borda-3 fundo-4 z-depth-0 col s12 toxto-capitalizado" style="margin-top: 30px; margin-bottom: -25px;">Ver detalhes <span class="fa fa-angle-right"></span></a>
+									  </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				  </div>
+				  {% endfor %}
+				  {% else %}
+				  <div class="col s12">
+					<div style="border: 1px solid #89d0f1; padding: 5px;" class="blue borda-3 lighten-5">
+					  <div class="container center-align">
+						  <h5 class="negrito-400"><i class="fa fa-wallet"></i> Nenhum curso registado por enquanto</h5>
+					  <p>Os cursos registados aparecem aqui.</p>
+					  <p>
+						<a href="{% url 'professor:novo-curso' %} " class="modal-trigger borda-3 btn green">Novo curso</a>
+					  </p>
+					  </div>
+				  </div>
+				  </div>
+				  {% endif %}
+				</div>
+			  </div>
+
+		</div>
+	</div>
+
+</section>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".owl-carousel").owlCarousel({
+			items: 5,
+			loop: true,
+			margin: 20,
+			nav: true,
+			navText: ["Anterior", "Próximo"],
+			autoplay: true,
+			autoplayTimeout: 2000,
+			dots: true,
+			responsive: {
+				0: {
+					items: 1
+				},
+				360: {
+					items: 3
+				},
+				1000: {
+					items: 5
+				}
+			}
+		});
+	});
+</script>
+
+<script>
+	var elem = document.querySelector('.collapsible.expandable');
+	var instance = M.Collapsible.init(elem, {
+		accordion: false
+	});
+
+</script>
+
+{% endblock %}

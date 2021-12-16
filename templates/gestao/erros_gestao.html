@@ -1,0 +1,106 @@
+{% extends 'base_gestao.html' %}
+{% block title %} Magazine Gestão {% endblock %}
+{% block content %}
+{% load static %}
+
+<nav class="white z-depth-0">
+    <div class="container nav-wrapper">
+        <div class="col s12 right">
+            <a class="disabled grey-text">Central de erros </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+      
+        <h4 class="grey-text text-darken-2 negrito">Erros reportados | {% if tot %} {{tot}} {% else %} 0 {% endif %}  </h4>
+        <div class="col s12 m12 l12">
+            <div class="row grey lighten-2 espaco-p-1">
+                <div class="col s12 m4 l4">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div>
+                            <input type="text" class="browser-default estilo-input" placeholder="Pesquise aqui...">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div class="responsive-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tipo de erro</th>
+                                    <th>Descrição</th>
+                                    <th>Anexo</th>
+                                    <th>Estado</th>
+                                    <th>User</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in erros %}
+                                <tr>
+                                    <td>{{forloop.counter}} </td>
+                                    <td>{{item.tipo_erro}} </td>
+                                    <td>{{item.mensagem|truncatewords:10}} </td>
+                                    <td>
+                                        {% if item.anexo_foto %}
+                                        <span class="badge green new" data-badge-caption="existe"></span>
+                                        {% else %}
+                                        <span class="badge red new" data-badge-caption="não existe"></span>
+                                        {% endif %}
+                                     </td>
+                                     <td>{{item.estado}} </td>
+                                     <td>{{item.user.email}} </td>
+                                     <td><a href="{% url 'gestaoInterna:detalhes-erro' pk=item.id %} " class="btn z-depth-0 btn-small texto-00 blue">abrir</a> </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <ul class="pagination">
+                        {% if erros.has_previous %}
+                        <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{erros.previous_page_number}}"><span class="fa fa-chevron-left"></span> Retroceder</a></li>
+                        {% endif %}
+                        <li class="disabled"><a href="">{{erros.number}}  de {{erros.paginator.num_pages}}</a></li>
+                        {% if erros.has_next %}
+                        <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{erros.next_page_number}}">Ver mais  <span class="fa fa-chevron-right"></span></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalCategoria" class="modal">
+    <div class="modal-content">
+      <h4>Nova categoria</h4>
+      <form action="" method="POST">
+          {% csrf_token %}
+
+          <div>
+              {{form.titulo}}
+          </div>
+          <div class="espaco-m-top-1">
+              <button type="submit" class="btn borda-2 z-depth-0 blue">Registar categoria</button>
+          </div>
+      </form>
+    </div>
+    <!-- <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+    </div> -->
+  </div>
+
+
+{% endblock %}

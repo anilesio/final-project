@@ -1,0 +1,66 @@
+
+  
+/* 
+  cor escura:
+  1 - #2d3035
+  ---------------
+  cor clara:
+  1 - #ecedee
+ */
+
+  .text-bold {
+    font-weight: 700;
+  }
+  
+  .text-small {
+    font-size: 0.8rem;
+  }
+  
+  .text-gray-light {
+    color: #dee2e6;
+  }
+  
+  .text-gray {
+    color: #ecedee;
+  }
+  
+  .text-gray-dark {
+    color: #6a6c70;
+  }
+
+
+  .page-content-Bg {
+    background: #fdfdfd;
+  }
+
+  .navbarBg {
+    background: #fdfdfd;
+    color: #ecedee;
+    border-bottom: 1px solid #d0ddfa;
+  }
+
+  .sidenavbarBg {
+    background: #fdfdfd;
+    color: #ecedee;
+    border-right: 1px solid #d0ddfa;
+  }
+
+  .bordaEscura{
+  border: 1px solid #d6dfe9;  
+  }
+
+  .fundoEscuro{
+    background: #f1f4f7 !important;
+    border: 1px solid #d0ddfa;  
+    color: #2d3035;
+  }
+
+  .fundoEscuro-2{
+    background-color: #ecedee !important;
+    border: 1px solid #d0d4db;  
+    color: #2d3035;
+  }
+
+  .textoEscuro-1{
+    color: #ecedee;
+  }

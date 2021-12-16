@@ -1,0 +1,225 @@
+{% extends 'base_estudante.html' %}
+{% block title %}{{objecto.tituloCurso}}  {% endblock %}
+{% load static %}
+{% block content %}
+
+<style media="screen">
+	label.labelFile {
+	background-color: #3370b2;
+	color: white;
+	padding: 0.3rem;
+	font-family: sans-serif;
+	border-radius: 0.3rem;
+	cursor: pointer;
+	margin-top: 1rem;
+  }
+  
+  #file-chosen{
+	margin-left: 0.3rem;
+	font-family: sans-serif;
+  }
+  
+  .contact-info{
+	display: none;
+  }
+  </style>
+
+<!-- fim banner inicial -->
+
+
+<div class="container">
+  <div class="row espaco-m-top-0">
+    
+    <div class="col s12 m12 l5">
+      <img src="{% static 'foto.png' %} " style="width: 100%; max-height: 300px; object-fit: cover;" alt="">
+      <h4>{{objecto.tituloCurso}}</h4>
+      <p>{{objecto.descricao}} </p>
+      <p class="negrito"><div class="chip amber lighten-3">
+        <img src="{% static 'user.png' %} " alt="perfil">
+        <span class="">Publicado por: <span class="negrito">{{objecto.user.first_name}} {{objecto.user.last_name}}</span></span>
+      </div>  <span class="right texto-0">Total de aulas: {{totVideos}} </span></p>
+
+      <h6 class="negrito">Especialidades</h6>
+      <hr>
+      {% if objecto.informatica == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Informática
+      </div>
+      {% endif %}
+      {% if objecto.petroleo == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Petróleo
+      </div>
+      {% endif %}
+      {% if objecto.geologia == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Geologia
+      </div>
+      {% endif %}
+      {% if objecto.geologia_minas == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Geologia e Minas
+      </div>
+      {% endif %}
+      {% if objecto.construcao_civil == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Construção civíl
+      </div>
+      {% endif %}
+      {% if objecto.agronoma == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Agrónoma
+      </div>
+      {% endif %}
+
+      {% if objecto.medicina_geral == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Medicina Geral
+      </div>
+      {% endif %}
+      {% if objecto.medicina_dentaria == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Medicina dentária
+      </div>
+      {% endif %}
+      {% if objecto.enfermagem == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Enfermagem
+      </div>
+      {% endif %}
+      {% if objecto.fisioterapia == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Fisioterapia
+      </div>
+      {% endif %}
+
+      {% if objecto.analises_clinicas == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Análises clínica
+      </div>
+      {% endif %}
+
+      {% if objecto.psicologia_forense == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Psicologia Forense
+      </div>
+      {% endif %}
+
+      {% if objecto.psicologia_clinica == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Psicologia clínica
+      </div>
+      {% endif %}
+
+      {% if objecto.direito == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Direito
+      </div>
+      {% endif %}
+      {% if objecto.ciencias_politicas == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Ciências Politícas
+      </div>
+      {% endif %}
+
+      {% if objecto.relacoes_publicas == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Relações Públicas
+      </div>
+      {% endif %}
+
+      {% if objecto.relacoes_internacionais == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Relações Internacionais
+      </div>
+      {% endif %}
+
+      {% if objecto.gestao_empresarial == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Gestão empresarial
+      </div>
+      {% endif %}
+
+      {% if objecto.economia == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Economia
+      </div>
+      {% endif %}
+
+      {% if objecto.gestao_administracao_empresas == True %}
+      <div class="chip">
+        <i class="fa fa-check"></i>
+        Gestão e Administração de empresas
+      </div>
+      {% endif %}
+
+      <h6 class="negrito">Universidades</h6>
+      <hr>
+
+      {% if objecto.utanga == True %}
+        <span style="" class="white-text texto-00 badge-novo brown borda-1">Universidade Técnica de Angola</span>
+      {% endif %}
+      {% if objecto.ucan == True %}
+        <span style="" class="white-text texto-00 badge-novo blue borda-1">Universidade Católica de Angola</span>
+        {% endif %}
+      {% if objecto.uan == True %}
+        <span style="" class="white-text texto-00 badge-novo blue darken-4 borda-1">Universidade Agostinho Neto</span>
+        {% endif %}
+        {% if objecto.uPiaget == True %}
+        <span style="" class="white-text texto-00 badge-novo deep-orange accent-4 borda-1">Universidade Jean Piaget</span>
+        {% endif %}
+    
+    </div>
+    <div class="col s12 m12 l7">
+      <div class="grey lighten-3 borda">
+        {% if videos %}
+        <table class=" highlight">
+          <thead>
+            <tbody>
+              {% for item in videos %}
+              <tr>
+                <td><img src="{% static 'user.png' %}" style="max-width: 60px;" class="" alt=""> </td>
+                <td class="grey-text">{{forloop.counter}} </td>
+                <td class="texto-1 grey lighten-2"><a href="{% url 'estudante:assistir-curso' pk=item.id %}" class="grey-text text-darken-3 negrito">{{item.tituloVideo}}</a> </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </thead>
+        </table>
+      {% else %}
+      <div style="border: 1px solid #f19e89; padding: 0px;" class="red borda-1 lighten-5">
+        <div class="container center-align">
+            <h5 class="negrito-400"><i class="fa fa-video-slash"></i> Nenhuma aula registada por enquanto</h5>
+        <p>As aulas registadas aparecem aqui.</p>
+        <p><a href="#modal1" class="modal-trigger"><span class="fa fa-plus-circle"></span> Adicionar aula ao curso</a></p>
+        </div>
+    </div>
+      {% endif %}
+      </div>
+    </div>
+
+   
+  </div>
+</div>
+
+
+{% endblock %}

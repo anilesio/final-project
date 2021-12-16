@@ -1,0 +1,241 @@
+{% extends 'base_gestao.html' %}
+{% block title %} Currículo Professor(a) {{objecto.first_name}} {{objecto.first_name}} - {{objecto.date_joined|date:"Y"}} {% endblock %}
+{% block content %}
+{% load static %}
+
+
+<style>
+
+  body{
+    background-color: #fafafa;
+  }
+    .table td,
+th,
+tr {
+  border: none !important;
+}
+
+.footer {
+  position: fixed;
+  padding: 1rem;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fbe9e7;
+  color: white;
+  text-align: center;
+  box-shadow: 1px 2px 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tamanho {
+  background-color: #fff !important;
+  margin: 27mm 16mm 27mm 16mm;
+  border: 1px solid #dedede;
+  box-shadow: 1px 2px 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+@media print {
+  .botao-imprimir {
+    display: none !important;
+    opacity: 0 !important;
+  }
+
+  .file {
+    display: none !important;
+  }
+
+  .logo {
+    width: 40%;
+    display: block;
+  }
+
+  nav, footer {
+    display: none !important;
+  }
+
+  table,
+  table.table {
+    font-size: 0.9em !important;
+  }
+
+  .banner-factura {
+    background-color: #1b3363 !important;
+  }
+  .tamanho {
+    margin: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .tabela-factura td, th{
+    border: 1px solid #dedede !important;
+  }
+}
+
+.borda-baixo-novo {
+  border-bottom: 4px solid #2c2c2c;
+}
+
+</style>
+
+<section class="tamanho">
+    <div class="espaco-p-1">
+        <div class="grey lighten-4 row">
+            <div class="col s12 m10 l9">
+                <h4>{{objecto.first_name}} {{objecto.last_name}} </h4>
+                <h6>Professor(a)</h6>
+            </div>
+
+            <div class="col s12 m12 l3">
+                <p><span class="fa fa-map-marked"></span> Londres</p>
+                <p><span class="fa fa-tty"></span> --- </p>
+                <p><span class="fa fa-envelope"></span> {{objecto.email}} </p>
+            </div>
+        </div>
+
+        {% if curriculo %}
+
+        
+        <div class="row">
+            <div class="col s12">
+                <h5 class="negrito borda-baixo">Descrição profissional</h5>
+            </div>
+            <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1">
+                <p class="texto-justificado">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores, obcaecati corporis. Eum, corporis delectus et alias vero dolorum corrupti doloremque odit. Sunt adipisci provident veritatis, tempora eos asperiores explicabo dicta?
+                    Consectetur dicta explicabo adipisci cupiditate temporibus quaerat facilis eos eveniet! Ipsum cumque voluptates numquam obcaecati, omnis fugit placeat porro corrupti dolorem perspiciatis hic laboriosam! Blanditiis accusantium obcaecati explicabo quasi ea.
+                    Pariatur dolores autem assumenda ad, qui, eaque voluptatum hic inventore omnis tenetur cupiditate? Accusamus veritatis ab, unde vel debitis, sapiente deserunt repellat quod doloribus delectus blanditiis provident! Aspernatur, aperiam animi!</p>
+            </div>
+        </div>
+        
+
+        <!-- experiência de trabaho -->
+        
+        <div class="row">
+          
+            <div class="col s12">
+                <h5 class="negrito borda-baixo">Experiência profissional</h5>
+            </div>
+            {% for item in curriculo %}
+        {% if item.tipoCurriculo == "Experiência profissional" %}
+            <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1 espaco-m-top-1">
+                <h6 class="grey-text text-darken-3"><span class="negrito">{{item.titulo}} </span> | {{item.localActuacao}} <span class="file">{% if item.ficheiro %} <a href="{% static item.ficheiro.url %} " class="grey-text" target="_blank"><span class="fa fa-link"></span> abrir anexo </a> {% else %} <span class="texto-0 grey-text text-lighten-1">sem anexo</span> {% endif %} </span> <span class="right">{{item.data_inicio|date:"Y"}}  - {% if item.data_fim %} {{item.data_fim|date:"Y"}} {% else %} até o momento {% endif %} </span> </h6>
+                <p class="texto-justificado">{{item.descricao}} </p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        
+        <!-- fim experiência de trabaho -->
+
+
+        <!-- escolaridade -->
+
+        <div class="row">
+          
+            <div class="col s12">
+                <h5 class="negrito borda-baixo">Formação académica</h5>
+            </div>
+            {% for item in curriculo %}
+        {% if item.tipoCurriculo == "Escolaridade" %}
+            <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1 espaco-m-top-1">
+              <h6 class="grey-text text-darken-3"><span class="negrito">{{item.titulo}} </span> | {{item.localActuacao}} <span class="file">{% if item.ficheiro %} <a href="{% static item.ficheiro.url %} " class="grey-text" target="_blank"><span class="fa fa-link"></span> abrir anexo </a> {% else %} <span class="texto-0 grey-text text-lighten-1">sem anexo</span> {% endif %} </span> <span class="right">{{item.data_inicio|date:"Y"}}  - {% if item.data_fim %} {{item.data_fim|date:"Y"}} {% else %} até o momento {% endif %} </span> </h6>
+              <p class="texto-justificado">{{item.descricao}} </p>
+
+
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        
+        <!-- fim escolaridade -->
+
+        <!-- estágios -->
+
+        <div class="row">
+          
+          <div class="col s12">
+              <h5 class="negrito borda-baixo">Estágios</h5>
+          </div>
+          {% for item in curriculo %}
+      {% if item.tipoCurriculo == "Estágio" %}
+          <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1 espaco-m-top-1">
+            <h6 class="grey-text text-darken-3"><span class="negrito">{{item.titulo}} </span> | {{item.localActuacao}} <span class="file">{% if item.ficheiro %} <a href="{% static item.ficheiro.url %} " class="grey-text" target="_blank"><span class="fa fa-link"></span> abrir anexo </a> {% else %} <span class="texto-0 grey-text text-lighten-1">sem anexo</span> {% endif %} </span> <span class="right">{{item.data_inicio|date:"Y"}}  - {% if item.data_fim %} {{item.data_fim|date:"Y"}} {% else %} até o momento {% endif %} </span> </h6>
+            <p class="texto-justificado">{{item.descricao}} </p>
+
+
+          </div>
+          {% endif %}
+          {% endfor %}
+      </div>
+      
+      <!-- fim estágios -->
+
+      <!-- estágios -->
+
+      <div class="row">
+          
+        <div class="col s12">
+            <h5 class="negrito borda-baixo">Curso de especialização</h5>
+        </div>
+        {% for item in curriculo %}
+    {% if item.tipoCurriculo == "Curso de especialização" %}
+        <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1 espaco-m-top-1">
+          <h6 class="grey-text text-darken-3"><span class="negrito">{{item.titulo}} </span> | {{item.localActuacao}} <span class="file">{% if item.ficheiro %} <a href="{% static item.ficheiro.url %} " class="grey-text" target="_blank"><span class="fa fa-link"></span> abrir anexo </a> {% else %} <span class="texto-0 grey-text text-lighten-1">sem anexo</span> {% endif %} </span> <span class="right">{{item.data_inicio|date:"Y"}}  - {% if item.data_fim %} {{item.data_fim|date:"Y"}} {% else %} até o momento {% endif %} </span> </h6>
+          <p class="texto-justificado">{{item.descricao}} </p>
+
+
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+    <!-- fim estágios -->
+
+
+        {% else %}
+        <div class="row">
+          <div class="col s12">
+            <div class="center grey-text text-darken-1">
+              <h4 class="negrito">Nada a mostrar</h4>
+              <p>Este professor não registou nada no seu currículo</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="row container">
+          <div class="col s12">
+            <div class="container">
+                <div class="borda-baixo"></div>
+                <div class="center">
+                  <h6 class="grey-text negrito right texto-0"><span class="fa fa-calendar-alt"></span> Actualizado em: {{objecto.date_joined|date:"Y"}}</h6>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+</section>
+
+
+<section class="botao-imprimir">
+    <div class="footer">
+        <div class="">
+            <a href="{% url 'gestaoInterna:professores-gestao-detalhes' pk=objecto.id %} " class="btn red darken-3 mt-4"><span class="fa fa-chevron-left"></span> Voltar</a>
+            <a class="btn blue btn-light mt-4 ml-4" onclick="imprimir()"><span class="fa fa-print"></span> Imprimir Currículo</a>
+            {% if objecto.is_active == False %}
+            <a href="{% url 'gestaoInterna:estado-user' pk=objecto.id %} " class="btn green"><span class="fa fa-check-square"></span> Activar professor</a>
+            {% else %}
+            <a href="{% url 'gestaoInterna:estado-user' pk=objecto.id %}" class="btn red"><span class="fa fa-ban"></span> Desactivar professor</a>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
+
+<script>
+  function imprimir() {
+    window.print()
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base_estudante.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .rodape-pub{
+    display: none;
+  }
+</style>
+
+<section style="min-height: 100vh;">
+  <div class="container">
+      <div class="row espaco-m-top-1">
+          <div class="col s12">
+            <h4 class="negrito grey-text text-darken-3 texto-uppercase">Cursos por faculdades</h4>
+            <h6>Nós dividimos os cursos pelas faculdades para facilitar a sua procura</h6>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s12 m3 l3">
+            <ul class="lista-cursos">
+              <li class="negrito grey-text text-darken-3">Engenharia</li>
+              <div class="borda-titulo-0 espaco-m-top-1 espaco-m-baixo-1"></div>
+              <li><a href="#" class="grey-text text-darken-3">Informática</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Petróleo</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Geologia</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Geologia e Minas</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Construção Civíl</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Agrónoma</a></li>
+            </ul>
+          </div>
+
+          <div class="col s12 m3 l3">
+            <ul class="lista-cursos">
+              <li class="negrito grey-text text-darken-3">Ciêcias da saúde</li>
+              <div class="borda-titulo-0 espaco-m-top-1 espaco-m-baixo-1"></div>
+              <li><a href="#" class="grey-text text-darken-3">Medicia Geral</a> </li>
+              <li><a href="#" class="grey-text text-darken-3">Medicia Dentária</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Enfermagem</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Fisioterapia</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Análises clínicas</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Saúde pública</a></li>
+              <!-- <li>Nutrição e dietética</li> -->
+            </ul>
+          </div>
+
+          <div class="col s12 m3 l3">
+            <ul class="lista-cursos">
+              <li class="negrito grey-text text-darken-3">Letras e Ciências sociais</li>
+              <div class="borda-titulo-0 espaco-m-top-1 espaco-m-baixo-1"></div>
+              <li><a href="#" class="grey-text text-darken-3">Psicologia forense</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Psicologia clínica</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Psicologia do trabalho/organizacional</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Direito</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Ciências políticas</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Relações Internacionais</a></li>
+              <!-- <li>Adminstração e relações públicas</li> -->
+            </ul>
+          </div>
+
+          <div class="col s12 m3 l3">
+            <ul class="lista-cursos">
+              <li class="negrito grey-text text-darken-3">Gestão</li>
+              <div class="borda-titulo-0 espaco-m-top-1 espaco-m-baixo-1"></div>
+              <li><a href="#" class="grey-text text-darken-3">Gestão empresarial</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Economia</a></li>
+              <li><a href="#" class="grey-text text-darken-3">Gestão e Adminstração de empresa</a></li>
+            </ul>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+{% endblock %}

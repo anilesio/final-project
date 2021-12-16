@@ -1,0 +1,46 @@
+{% extends 'base_professor.html' %}
+{% load static %}
+{% block content %}
+
+
+ <style media="screen">
+   .altura{
+     min-height: 90vh;
+   }
+ </style>
+
+<section class="altura">
+  <div class="container">
+      <div class="row espaco-m-top-0">
+          <div class="col s12 m5 l5">
+            <img src="{% static 'user.png' %}" style="max-width: 15%;" alt="">
+            <h4 class="negrito grey-text text-darken-3">{{estudante.user.first_name}} {{estudante.user.last_name}}</h4>
+            <h6 class="negrito grey-text text-darken-3">{{estudante.user.email}} | {{estudante.telefone1}} </h6>
+            <h6>Reunimos os melhores cursos preparatórios para poderes te preparar melhor</h6>
+          </div>
+          <div class="col s12 m7 l7">
+            <div class="row espaco-p-top-1 ">
+              <div class="col s12 m12 l12">
+                  <div class="espaco-p-1 fundoEscuro borda-2">
+                      <div class="espaco-m-left-1">
+                          <h6 class="">Cursos matriculados</h6>
+                          <div class="borda-titulo-0"></div>
+                          <span class="texto-3"><span class="blue-text">{{totMatrivulados}} </span> <span class="fa fa-book texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </div>
+      </div>
+      <hr>
+  </div>
+</section>
+
+<script>
+
+$(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>
+
+{% endblock %}

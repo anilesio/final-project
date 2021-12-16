@@ -1,0 +1,92 @@
+{% extends 'base_gestao.html' %}
+{% block title %} Magazine Gestão {% endblock %}
+{% block content %}
+{% load static %}
+
+<nav class="white z-depth-0">
+    <div class="container nav-wrapper">
+        <div class="col s12 right">
+            <a class="disabled grey-text">Magazine gestão </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 right-align">
+            
+            <a href="#modalCategoria" class="modal-trigger btn z-depth-0 borda-2 green">Nova categoria <span class="fa fa-plus"></span> </a>
+        </div>
+
+        <h4 class="grey-text text-darken-2 negrito">Magazine categorias | {{tot}}  </h4>
+        <p>Aqui estão alistados todos as categoria registadas. Pode adicionar um novo ou gerir os que já existem.</p>
+        <div class="col s12 m12 l12">
+            <div class="row grey lighten-2 espaco-p-1">
+                <div class="col s12 m4 l4">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div>
+                            <input type="text" class="browser-default estilo-input" placeholder="Pesquise aqui...">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                {% if categoria %}
+                {% for item in categoria %}
+                <div class="col s12 m4 l4">
+                    <div class="card z-depth-0 borda borda-2">
+                        <div class="card-content">
+                          <span class="card-title grey-text text-darken-4">{{item.titulo}} </span>
+                          <p><a href="{% url 'gestaoInterna:magazine-artigos' pk=item.id %} " class="btn borda-2 z-depth-0 blue btn-small">Ver categoria</a></p>
+                        </div>
+                      </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="col s12 l12">
+                    <div class="card espaco-p-1 z-depth-0 borda borda-2 lighten-5">
+                        <h5 class="negrito red-text">Não existem ainda categoria registadas <span class="fa fa-ban"></span></h5>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <ul class="pagination">
+                        {% if categoria.has_previous %}
+                        <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{categoria.previous_page_number}}"><span class="fa fa-chevron-left"></span> Retroceder</a></li>
+                        {% endif %}
+                        <li class="disabled"><a href="">{{categoria.number}}  de {{categoria.paginator.num_pages}}</a></li>
+                        {% if categoria.has_next %}
+                        <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{categoria.next_page_number}}">Ver mais  <span class="fa fa-chevron-right"></span></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalCategoria" class="modal">
+    <div class="modal-content">
+      <h4>Nova categoria</h4>
+      <form action="" method="POST">
+          {% csrf_token %}
+
+          <div>
+              {{form.titulo}}
+          </div>
+          <div class="espaco-m-top-1">
+              <button type="submit" class="btn borda-2 z-depth-0 blue">Registar categoria</button>
+          </div>
+      </form>
+    </div>
+    <!-- <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+    </div> -->
+  </div>
+
+
+{% endblock %}

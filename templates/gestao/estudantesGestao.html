@@ -1,0 +1,66 @@
+{% extends 'base_gestao.html' %}
+{% block title %} Magazine Gestão {% endblock %}
+{% block content %}
+{% load static %}
+
+<nav class="white z-depth-0">
+    <div class="container nav-wrapper">
+        <div class="col s12 right">
+            <a class="disabled grey-text">Estudantes gestão </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <h4 class="grey-text text-darken-2 negrito">Estudantes  </h4>
+        <p>Aqui estão alistados todos os estudantes registados no sistema.</p>
+        <div class="col s12 m12 l12">
+            <table class="highlight striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Username</th>
+                        <th>Estado</th>
+                        <th>Acção</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for item in users %}
+                    <tr>
+                        <td>1</td>
+                        <td>{{item.first_name}} {{item.last_name}} </td>
+                        <td>{{item.username}} </td>
+                        <td>{% if item.is_active == False %} 
+                            <span class="badge red new" data-badge-caption="não activo"></span>
+                            {% else %}
+                            <span class="badge green new" data-badge-caption="activo"></span>
+                            {% endif %}
+                        </td>
+                        <td><a href="{% url 'gestaoInterna:estudantes-gestao-detalhes' pk=item.id %}" class="btn z-depth-0 green btn-small">ver</a></td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+          <ul class="pagination">
+            {% if users.has_previous %}
+            <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{users.previous_page_number}}"><span class="fa fa-chevron-left"></span> Retroceder</a></li>
+            {% endif %}
+            <li class="disabled"><a href="">{{users.number}}  de {{users.paginator.num_pages}}</a></li>
+            {% if users.has_next %}
+            <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{users.next_page_number}}">Ver mais  <span class="fa fa-chevron-right"></span></a></li>
+            {% endif %}
+        </ul>
+        </div>
+      </div>
+</div>
+
+{% endblock %}

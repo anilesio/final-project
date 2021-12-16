@@ -1,0 +1,255 @@
+{% extends 'base_publico.html' %} {% load static %} {% block content %}
+
+<style>
+    .collection {
+        border: none;
+    }
+    
+    .collection .collection-item {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    
+    .collection a.collection-item {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 1em;
+        padding: 1em;
+        text-align: center;
+    }
+    
+    .rodape-pub {
+        display: none;
+    }
+</style>
+
+<style media="screen">
+    .tablink {
+        background-color: #555;
+        color: white;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: default;
+        padding: 14px 16px;
+        font-size: 17px;
+        width: 33.3%;
+        cursor: pointer;
+        transition: 0.3s all ease-in-out;
+    }
+    
+    .tablink:hover {
+        opacity: 0.8;
+    }
+    
+    .tabcontent:active {
+        opacity: 0.4;
+    }
+    /* Style the tab content */
+    
+    .tabcontent {
+        display: none;
+        padding: 20px;
+        transition: 0.3s all ease-in-out;
+    }
+    
+    #London {
+        background-color: #f1f1f1;
+    }
+    
+    #Paris {
+        background-color: green;
+    }
+    
+    #Tokyo {
+        background-color: blue;
+    }
+    
+    #Oslo {
+        background-color: orange;
+    }
+    
+    .banner_criar_conta {
+        height: 60%;
+        align-self: stretch;
+        background-image: linear-gradient(to top, rgba(150, 150, 150, 0.6), #e0405099 90%), url('../../../static/img/banner/3.png');
+        background-size: cover;
+    }
+    
+    .indicators {
+        display: none;
+    }
+</style>
+
+<style>
+    .banner_professor {
+        margin-top: 0px;
+        padding: 5%;
+        min-height: 60vh;
+        color: #f1f1f1;
+        background: url('../../static/img/banner/6.jpg') 0px -300px fixed no-repeat;
+    }
+</style>
+
+<div class="banner_professor">
+    <div class="caption center-align">
+        <h2 class="texto-4 negrito tituloBanner">Torne-se um <br> líder no ensino </h2>
+        <h6 class="texto-2">Construa o seu legado e conquiste a sua marca </h6>
+    </div>
+</div>
+
+<!-- <div class="slider">
+    <ul class="slides">
+        <li>
+            <img src="{% static 'img/banner/6.jpg' %} " class="blue darken-1">
+            <div class="caption center-align">
+                <h2 class="texto-4 negrito">Torne-se um <br> líder no ensino </h2>
+                <h6 class="texto-2">Construa o seu legado e conquiste a sua marca </h6>
+            </div>
+        </li>
+    </ul>
+</div> -->
+
+<section>
+    <div class="container">
+        <div class="row espaco-m-top-1">
+            <div class="col s12 m12 l10 offset-l1">
+                <div class="card z-depth-0 borda borda-1 grey lighten-5">
+                    <div class="card-content">
+                        <h4 class="negrito center">Potencialize o seu conhecimento</h4>
+                        <div class="borda-titulo-0 center-block"></div>
+                        <div class="row">
+
+
+                            <div class="col s12 m6 l6 espaco-p-top-1">
+                                <h6>Inspire alunos</h6>
+                                <p class="grey-text text-darken-2 negrito-300"><i class="fa fa-check"></i> Compartilhe seu conhecimento e ajude as pessoas a aprender novas habilidades, melhorar suas carreiras e explorar seus hobbies.</p>
+                            </div>
+
+                            <div class="col s12 m6 l6 espaco-p-top-1">
+                                <h6>Participe da nossa comunidade</h6>
+                                <p class="grey-text text-darken-2 negrito-300"><i class="fa fa-check"></i> Conte com a ajuda da nossa comunidade ativa de instrutores em todo o processo de criação do seu curso.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <section>
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <h5 class="center negrito">Veja como caminho para o sucesso</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="">
+        <a onclick="openCity(event, 'London')" id="defaultOpen" class="tablink center-align green"><i class="fa fa-check-double"></i> Registar quarteirão</a>
+        <a onclick="openCity(event, 'Paris')" class="tablink center-align deep-purple"><i class="fa fa-check"></i> Registar prédio <i class="fa fa-chevron-right"></i></a>
+        <a onclick="openCity(event, 'Tokyo')" class="tablink center-align">Registar apartamento <i class="fa fa-chevron-right"></i></a>
+      </div>
+    </div>
+    <div class="row">
+      <div id="London" class="tabcontent">
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <h5 class="negrito grey-text text-darken-3">Planeje seu curso</h5>
+            <p>Organize-se</p>
+            <p>Comece com sua paixão e seu conhecimento. Depois, escolha um tema e planeje suas aulas no Google Docs, Microsoft Excel ou no seu bloco de notas favorito.</p>
+            <p>Você pode dar aulas da maneira que preferir e pode criar cursos em vários idiomas para inspirar ainda mais alunos.</p>
+            <p>Como ajudamos você</p>
+            <p>A Udemy oferece cursos gratuitos sobre como criar seu próprio curso, incluindo planilhas e exemplos do mundo real. Além disso, nosso painel do instrutor e nossas páginas de currículo ajudam a manter você no caminho certo.</p>
+          </div>
+        </div>
+      </div>
+
+<div id="Paris" class="tabcontent">
+  <div class="row">
+    <div class="col s12 m6 l6">
+
+    </div>
+    <div class="col s12 m6 l6">
+      <h5 class="negrito grey-text text-darken-3">Planeje seu curso</h5>
+      <p>Organize-se</p>
+      <p>Comece com sua paixão e seu conhecimento. Depois, escolha um tema e planeje suas aulas no Google Docs, Microsoft Excel ou no seu bloco de notas favorito.</p>
+      <p>Você pode dar aulas da maneira que preferir e pode criar cursos em vários idiomas para inspirar ainda mais alunos.</p>
+      <p>Como ajudamos você</p>
+      <p>A Udemy oferece cursos gratuitos sobre como criar seu próprio curso, incluindo planilhas e exemplos do mundo real. Além disso, nosso painel do instrutor e nossas páginas de currículo ajudam a manter você no caminho certo.</p>
+    </div>
+  </div>
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <div class="row">
+    <div class="col s12 m6 l6">
+      <h5 class="negrito grey-text text-darken-3">Planeje seu curso</h5>
+      <p>Organize-se</p>
+      <p>Comece com sua paixão e seu conhecimento. Depois, escolha um tema e planeje suas aulas no Google Docs, Microsoft Excel ou no seu bloco de notas favorito.</p>
+      <p>Você pode dar aulas da maneira que preferir e pode criar cursos em vários idiomas para inspirar ainda mais alunos.</p>
+      <p>Como ajudamos você</p>
+      <p>A Udemy oferece cursos gratuitos sobre como criar seu próprio curso, incluindo planilhas e exemplos do mundo real. Além disso, nosso painel do instrutor e nossas páginas de currículo ajudam a manter você no caminho certo.</p>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section> -->
+
+<section class="espaco-m-top-1">
+    <div class="container center-align">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h4 class="">Estamos à disposição para ajudar</h4>
+                <div class="borda-titulo-0 center-block">
+
+                </div>
+            </div>
+        </div>
+        <div class="row espaco-m-top-1">
+            <div class="col s12 m10 l10 offset-l1 offset-m1">
+                <p class="texto-2 linha-top-40">Nossa equipe de Suporte ao Instrutor está disponível 24 horas, 7 dias por semana para ajudar você com a criação do seu curso. Use a nossa <a href="">central de ajuda</a> , uma central de recursos que pode ajudar nesse processo. Poderá
+                    esclarecer as suas dúvidasa que tem sobre a experiência de leccionar na PLATAFORMA. </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="">
+    <div class="espaco-p-1">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div class="center">
+                        <h5 class="negrito">Torne-se um professor hoje</h5>
+                        <p class="texto-1">Junte-se à nossa comunidade de educação online</p>
+                        <a href="{% url 'accounts:cadastrar-professor' %} " class="z-depth-0 borda-3 pulse  btn btn-large red">Começar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+
+{% endblock %}

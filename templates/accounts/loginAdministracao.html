@@ -1,0 +1,62 @@
+{% extends 'base_publico.html' %} {% block title %} Acessar à conta{% endblock %} {% block content %}
+<!-- CORPO DA PÁGINA -->
+
+<style>
+    body {
+        background-color: aliceblue;
+    }
+</style>
+
+<section class="espaco-m-top-1 espaco-m-baixo-1">
+    <div class="container">
+
+        <div class="row container">
+            <div class="col s12 m8 l4 offset-l4 offset-m2">
+                <div class="espaco-m-baixo-1">
+                    <div class="espaco-m-baixo-1">
+                        <h6 class=" negrito grey-text text-darken-3">Administração</h6>
+                    </div>
+                    <hr>
+                    <p class="grey-text text-darken-2">Área reservada</p>
+                </div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <input type="text" class="estilo-input browser-default" placeholder="Username"
+                                name="username" id="id_username" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <input type="password" class="estilo-input browser-default" placeholder="Palavra-passe"
+                                name="password" id="id_password" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <button type="submit"
+                                class="btn col s12 z-depth-0 borda-3 blue blue-grey texto-capitalizado"><span
+                                    class="fa fa-unlock"></span> Entrar</button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <p class="center"><a href="#">Esqueci a minha senha <span class="fa fa-lock"></span></a>
+                            </p>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

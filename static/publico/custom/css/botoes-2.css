@@ -1,0 +1,33 @@
+  .input-field {
+    width: 100%;
+    padding: 15px;
+    font-size: 12pt;
+    outline: none;
+    border: 1px solid #909090;
+    border-radius: 3px;
+    margin-bottom: -5px;
+  }
+
+  .input-field::placeholder{
+    color: #909090;
+  }
+  
+  .input-field:focus {
+    border: 1px solid dodgerblue;
+  }
+  
+  /* Set a style for the submit button */
+  .btn-style-1 {
+    background-color: dodgerblue;
+    color: white;
+    font-weight: bold;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  .btn-style-1:hover {
+    opacity: 1;
+  }

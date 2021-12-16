@@ -1,0 +1,88 @@
+{% extends 'base_publico.html' %}
+{% block title %} Magazine {% endblock %}
+{% block content %}
+{% load static %}
+
+<style>
+    .d_flex {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .row_reverse {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+        flex-direction: row-reverse;
+    }
+
+    body {
+        background: url("../../static/banner.png");
+        background-size: cover;
+    }
+</style>
+
+<!-- conteudo -->
+<div class="container" style="min-height: 100vh">
+    <div class="row">
+        <div class="col s12">
+            <h4 class="grey-text text-darken-2 negrito">Notícias <span class="titulo-4 sem-negrito right" style="font-size: 0.5em !important;">(página {{artigos.number}}  de {{artigos.paginator.num_pages}}) </span></h4>
+        </div>
+        <div class="col s12 m12 l8">
+            <div class="row">
+                {% for item in artigos %}
+                <div class="col s12 m6 l6">
+                    <div class="card">
+                        <div class="card-image">
+                            <a href="{% url 'website:ver_magazine' pk=item.id %}" class="grey-text text-lighten-2 negrito">
+                                <img src="{% static item.foto.url %}" class="" style="filter: brightness(70%); height: 200px; object-fit: cover;">
+                                <span class="card-title">{{item.titulo_magazine}} </span>
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <span class="grey-text text-darken-1 texto-uppercase" style="font-size: 0.8em;">{{item.data_criacao}} </span> <br>
+                            <a href=""><span class="titulo-1 negrito" style="letter-spacing: 3px; font-size: 0.8em;">{{item.categoria}} </span></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="col s12 m12 l12">
+                    <ul class="pagination">
+                        {% if artigos.has_previous %}
+                        <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{artigos.previous_page_number}}"><span class="fa fa-chevron-left"></span> Retroceder</a></li>
+                        {% endif %} {% if artigos.has_next %}
+                        <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{artigos.next_page_number}}">Ver mais  <span class="fa fa-chevron-right"></span></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m12 l4">
+            <div class="row">
+                <div class="col s12 m12 s12">
+                    <div class="input-field">
+                        <input type="text" id="txt-localizacao" class="col s12 m6 l10 browser-default estilo-input" style="border-radius: 50px 0 0 50px;" placeholder="Pesquise aqui...">
+                    </div>
+                    <div class="input-field">
+                        <button class="btn z-depth-0 btn-nz-p col s12 m6 l2" style="border-radius: 0 50px 50px 0; margin-left: -5px; margin-top: 0px; height: 38px; line-height: 0px;"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="col s12 m12 s12">
+                      <h6 class=" collection-header negrito texto-1">Categorias</h6>
+                    <div class="collection with-header sem-borda">
+                        {% for item in categorias %}
+                        <a href="{% url 'website:magazine_categorias' pk=item.id %}" class="grey-text hoverable borda text-darken-4 grey lighten-5 collection-item">{{item.titulo}} </a> {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- fim conteudo -->
+
+
+{% endblock %}

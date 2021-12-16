@@ -1,0 +1,92 @@
+{% extends 'base_professor.html' %}
+{% load static %}
+{% block title %}Ajuda {% endblock %}
+{% block content %}
+<style>
+    .collapsible li{
+        background-color: #fff !important;
+    }
+    .corpo{
+        background: url('../../static/banner.png') no-repeat;
+        background-size: cover;
+        padding: 20px;
+        margin-top: -40px;
+    }
+
+    .cartao{
+        border: 1px solid #e04050;
+        background-color: #fff !important;
+    }
+
+    .hover-top{
+        transform: scale(0.8);
+        transition: all 0.3s;
+    }
+
+    .hover-top:hover{
+        transform: scale(0.9);
+        border: 2px solid #e04050;
+        /* border: 1px solid #ffffff !important; */
+    }
+
+</style>
+
+ <!-- banner inicial -->
+ <div class="slider">
+    <ul class="slides">
+        <li>
+            <img src="{% static 'publico/img/locais/feet-932346_1920.jpg' %}" class="grey darken-4" style="filter: brightness(70%);">
+            <div class="caption left-align">
+                <h3 class="tituloBanner texto-5 negrito">Bem-vindo(a) <br> a nossa Central de ajuda </h3>
+                <h6>Encontre aqui as respostas para as suas questões</h6>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- fim banner inicial -->
+    <div class="content">
+        <section class="corpo">
+            <div class="container">
+                <div class="row espaco-m-top-1">
+                    <div class="col s12">
+                        <h3 class="negrito titulo-4 titulo-0">Seleccione um item:</h3>
+                    </div>
+                    {% for item in tipo_artigo %}
+                    <div class="col s12 m4 l3">
+                        <div class="cartao hover-top">
+                            <a href="{% url 'professor:artigos' item.pk %}">
+                                <div class="espaco-m-baixo-2 espaco-m-top-2 center">
+                                        <img src="{% static item.icone.url %}" style="padding: 5px; border-radius: 3px; border: 2px solid #e04050;" alt="">
+                                    <h6 class="titulo-4 negrito">{{item.titulo}} </h6>
+                                    <!-- <span class="titulo-4">8 artigos</span> -->
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <a href="{% url 'professor:reportar-erro' %} " class="btnAnimacao btn borda-3 hoverable z-depth-1 blue btn-large darken-1 open-button btn modal-trigger">
+        <i class="fa fa-cog"></i>
+        <span style="position: relative; top: -7%; left: 3%;">Reportar erro</span>
+    </a>
+
+<script>
+
+     document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.slider');
+    var instances = M.Slider.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.slider').slider();
+  });
+
+</script>
+
+{% endblock %}

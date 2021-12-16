@@ -1,0 +1,180 @@
+{% extends 'base_publico.html' %}
+{% block title %} Comece a aulmentar o seu raio de estudantes{% endblock %}
+{% block content %}
+
+<style media="screen">
+	label.labelFile {
+	background-color: #3370b2;
+	color: white;
+	padding: 0.3rem;
+	font-family: sans-serif;
+	border-radius: 0.3rem;
+	cursor: pointer;
+	margin-top: 1rem;
+  }
+
+  #file-chosen{
+	margin-left: 0.3rem;
+	font-family: sans-serif;
+  }
+
+  .contact-info{
+	display: none;
+  }
+  </style>
+
+<!-- FORMULÁRIO DE CADASTRO -->
+<section class="espaco-m-top-1 espaco-m-baixo-1">
+  <div class="container">
+      <div class="row">
+        <div class="col s12 m12 l6 espaco-m-top-1">
+          <div class="row">
+            <div class="col s12">
+              <div class="espaco-m-baixo-1">
+                <h5 class="green-text text-darken-1"><span class="negrito">Olá {{objecto.first_name}}!</span> Seja bem-vindo(a) ao prepare-se</h5>
+                <h6 class="grey-text text-darken-3">Estás quase lá. Cadastre o seu currículo de profissional!</h6>
+
+              </div>
+              <hr>
+              <p class="grey-text text-darken-2">Mostre para o público o seu pontencial e aumente as chances de ter um público.</p>
+      
+            </div>
+            <div class="col s12 m12 l12 ">
+              <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col s12">
+                    <label for="">Tipo(*) </label>
+                    {{form.tipoCurriculo}}
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col s12">
+                    <label for="">Denominação(*) </label>
+                    <input type="text" required class="browser-default estilo-input" id="id_titulo" name="titulo" placeholder="Professor Catedrático">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col s12">
+                    <label for="">Local de actuação</label>
+                    <input type="text" class="browser-default estilo-input" id="id_localActuacao" name="localActuacao" required placeholder="Escola nº..., Empresa XPTO">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col s12 m12 l6">
+                    <label for="">Data de início(*) </label>
+                    <input type="date" required onkeydown="return false" min="1900-01-01" class="browser-default estilo-input" id="id_data_inicio" name="data_inicio">
+                  </div>
+
+                  <div class="col s12 m12 l6">
+                    <label for="">Data de fim (opcional) </label>
+                    <input type="date" onkeydown="return false" min="1900-01-01" class="browser-default estilo-input" id="id_data_fim" max="novaData()" name="data_fim">
+                  </div>
+                </div>
+              
+                <div class="row">
+                  <div class="col s12 m12 l12">
+                    <label for="">Descrição(*) </label>
+                    <textarea name="descricao" required placeholder="Conte aqui um pouco da ua experiência..." class="browser-default estilo-input" id="id_descricao" cols="30" rows="10"></textarea>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col s12 m12 l12">
+                    <label for="">Seleccione algum arquivo </label>
+                    <div class="center center-block">
+                      <input type="file"  name="ficheiro" id="id_ficheiro" hidden/>
+                        <label class="labelFile" for="id_ficheiro" name="ficheiro"><span class="fa fa-plus"></span> Seleccione uma imagem</label> <br>
+                      <span id="file-chosen">nenhuma ficheiro seleccionado</span>
+                  </div>
+                </div>
+
+                <div class="row" data-aos="fade-up" data-aos-delay="200">
+                  <div class="col s12 m12 l12">
+                    <div class="espaco-m-top-0">
+                      <button type="submit" class="btn green borda-3 z-depth-1 texto-capitalizado"> <span
+                          class="fa fa-plus"></span> Salvar</button>
+                    </div>
+                  </div>
+
+                  <div class="col s12 m12 l12 right-align espaco-m-top-1">
+                <hr>
+
+                    <a href="{% url 'accounts:sucesso-cadastro-professor' %} " class="btn blue"><span class="fa fa-check"></span> Finaliar</a>
+                  </div>
+                </div>
+      
+               
+              </form>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+  </div>
+</section>
+<!-- FORMULÁRIO DE CADASTRO -->
+
+
+<script>
+  
+  $(function(){
+    var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var maxDate = year + '-' + month + '-' + day;    
+    $('#id_data_fim').attr('max', maxDate);
+    $('#id_data_inicio').attr('max', maxDate);
+});
+</script>
+
+<script type="text/javascript">
+  const actualBtn = document.getElementById('id_ficheiro');
+
+  const fileChosen = document.getElementById('file-chosen');
+
+  actualBtn.addEventListener('change', function(){
+	fileChosen.textContent = this.files[0].name
+  })
+  </script>
+
+{% if messages %}
+<script>
+    window.onload = function() {
+      {% for message in messages %}
+      M.toast({html: 'Item adicionado' })
+      M.toast({html: 'Adicione mais itens ao seu currículo' })
+      {% endfor %}
+    }
+</script>
+{% endif %}
+
+<!-- {% if messages %}
+<script>
+    window.onload = function() {
+        { %
+            for message in messages %
+        }
+        $.notify("{{message}}", { %
+                if message.tags %
+            }
+            "{{ message.tags }}" { % endif %
+            }); { % endfor %
+        }
+    }
+</script>
+{% endif %} -->
+
+{% endblock %}

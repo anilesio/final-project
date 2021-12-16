@@ -1,0 +1,160 @@
+{% extends 'base_gestao.html' %}
+{% block title %} {{objecto.titulo}} {% endblock %}
+{% block content %}
+{% load static %}
+
+<nav class="white z-depth-0">
+    <div class="container nav-wrapper">
+        <div class="col s12 right">
+            <a href="{% url 'gestaoInterna:magazine-gestao' %} " class="blue-text">Magazine gestão > </a> <a class="disabled grey-text">Magazine artigos</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 right-align espaco-m-baixo-1">
+            <a href="{% url 'gestaoInterna:editar-categoria-magazine' pk=objecto.id %} " class="btn z-depth-0 borda-left-top-2px grey darken-1">Editar categoria <span class="fa fa-plus"></span> </a>
+            <a href="#modalArtigoMagazine" class="modal-trigger borda-right-top-2px btn z-depth-0 green">Novo artigo <span class="fa fa-plus"></span> </a>
+        </div>
+        <h4 class="grey-text text-darken-2 negrito">Artigos de {{objecto.titulo}} | {{tot}}  <a href="#modalArtigoDesabilitados" class="modal-trigger right btn btn-small white grey-text z-depth-0">Artigos apagados <span class="fa fa-filter"></span></a> </h4>
+        <p>Aqui estão alistados todos os artigos do magazine registados. Pode adicionar um novo ou gerir os que já existem.</p>
+        <div class="col s12 m12 l12">
+          <div class="row grey lighten-2 espaco-p-1">
+            <div class="col s12 m4 l4">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <input type="text" class="browser-default estilo-input" placeholder="Pesquise aqui...">
+                    </div>
+                </form>
+            </div>
+        </div>
+            <div class="row">
+                {% if artigos %}
+                {% for item in artigos %}
+                <div class="col s12 m3 l3">
+                    <div class="card small">
+                        <div class="card-image">
+                          <a href="{% url 'gestaoInterna:ver-artigo-magazine' pk=item.id %} "><img src="{% static 'foto.png' %}" style="filter: brightness(30%);"></a>
+                          <span class="card-title">{{item.titulo_magazine}} </span>
+                        </div>
+                        <div class="card-content">
+                            
+                            <p class="grey-text text-darken-2"><span class="fa fa-calendar-alt"></span> {{item.data_criacao}} <br> <span class="fa fa-user"></span> @{{item.user}} </p>
+                          <p class="texto-justificado"> {{item.corpo_magazine|truncatewords:10}} </p>
+                        </div>
+                        <div class="card-action">
+                          <a href="{% url 'gestaoInterna:ver-artigo-magazine' pk=item.id %} " class="btn btn-small z-depth-0 blue blue borda-2 darken-1">Ver detalhes</a>
+                        </div>
+                      </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="col s12 l12">
+                    
+                    <div class="card espaco-p-1 z-depth-0 borda borda-2 red lighten-5">
+                        <h5 class="negrito red-text">Não existem ainda artigos registados nesta categoria <span class="fa fa-ban"></span></h5>
+                        <a href="{% url 'gestaoInterna:magazine-gestao' %} " class="btn z-depth-0 borda-2"><span class="fa fa-chevron-left"></span> Voltar</a>
+                    </div>
+                    
+                </div>
+                {% endif %}
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <ul class="pagination">
+                  {% if artigos.has_previous %}
+                  <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{artigos.previous_page_number}}"><span class="fa fa-chevron-left"></span> Retroceder</a></li>
+                  {% endif %}
+                  <li class="disabled"><a href="">{{artigos.number}}  de {{artigos.paginator.num_pages}}</a></li>
+                  {% if artigos.has_next %}
+                  <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{artigos.next_page_number}}">Ver mais  <span class="fa fa-chevron-right"></span></a></li>
+                  {% endif %}
+              </ul>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalArtigoMagazine" class="modal">
+    <div class="modal-content">
+      <h4>Novo artigo</h4>
+      <form action="" method="POST">
+          {% csrf_token %}
+
+          <div class="row">
+              <div class="col s12">
+                  <label for="">Título magazine</label>
+                {{form.titulo_magazine}}
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+                <label for="">Corpo da notícia</label>
+              {{form.corpo_magazine}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <label for="">Categoria da notícia</label>
+              {{form.categoria}}
+            </div>
+
+            <div class="col s12 m6 l6">
+                <label for="">Nível de importância</label>
+              {{form.importancia}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                {{form.foto}}
+            </div>
+        </div>
+          <div class="espaco-m-top-1">
+              <button type="submit" class="btn z-depth-0 blue borda-2">Registar artigo</button>
+          </div>
+      </form>
+    </div>
+    <!-- <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+    </div> -->
+</div>
+
+
+<div id="modalArtigoDesabilitados" class="modal">
+  <div class="modal-content red lighten-5">
+    <h4 class="red lighten-4 espaco-p-1">Artigos apagados</h4>
+    <table>
+        <thead>
+          <tr>
+            <td>#</td>
+            <th>Artigo</th>
+            <th>Acção</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if artigosDesabilitados %}
+          {% for item in artigosDesabilitados %}
+          <tr>
+            <td>{{ forloop.counter }} </td>
+            <td>{{item.titulo_magazine}} </td>
+            <td><a href="{% url 'gestaoInterna:ver-artigo-magazine' pk=item.id %} " class="btn btn-small z-depth-0 borda-2 blue">Ver detalhes <span class="fa fa-eye"></span></a> <a href="{% url 'gestaoInterna:eliminar-magazine' pk=item.id %} " class="btn green btn-small z-depth-0 borda-2">Restaurar <span class="fa fa-check-double"></span> </a> </td>
+          </tr>
+          {% endfor %}
+          {% else %}
+
+          <tr>
+            <td>Nada a mostrar</td>
+          </tr>
+
+          {% endif %}
+        </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

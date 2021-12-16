@@ -1,0 +1,170 @@
+{% extends 'base_estudante.html' %} {% load static %} {% block content %}
+
+<!-- fim banner inicial -->
+
+<section>
+    <div class="container">
+        <div class="row espaco-m-top-0">
+            <div class="col s12 m5 l5">
+                <img src="{% static 'user.png' %}" style="max-width: 15%;" alt="">
+                <h4 class="negrito grey-text text-darken-3">{{estudante.user.first_name}} {{estudante.user.last_name}} <a href="#modalConta" class="modal-trigger btn btn-small borda-3 z-depth-0"><span class="fa fa-edit"></span> editar conta</a> </h4>
+                <h6 class="negrito grey-text text-darken-3">{{estudante.user.email}} </h6>
+                <h6>Reunimos os melhores cursos preparatórios para poderes te preparar melhor</h6>
+            </div>
+            <div class="col s12 m7 l7">
+                <div class="row espaco-p-top-1 ">
+                    <div class="col s12 m6 l6">
+                        <div class="espaco-p-1 fundoEscuro borda-2">
+                            <div class="espaco-m-left-1">
+                                <h6 class="">Cursos matriculados</h6>
+                                <div class="borda-titulo-0"></div>
+                                <span class="texto-3"><span class="blue-text">{{totMatrivulados}} </span> <span class="fa fa-book texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6 l6">
+                        <div class="espaco-p-1 fundoEscuro borda-2">
+                            <div class="espaco-m-left-1">
+                                <h6 class="">Mensagens </h6>
+                                <div class="borda-titulo-0"></div>
+                                <span class="texto-3"><span class="blue-text">0x </span> <span class="fa fa-envelope texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+                                <span class="texto-00"><a href="" class="grey-text">1 | novo <span class="fa fa-star yellow-text text-darken-2"></span></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</section>
+
+
+<div class="container espaco-m-top-0">
+
+    <div class="row">
+        <div class="col s12 m6 l8">
+            <div class="row">
+                <div class="col s12 m12 l12 ">
+                    <h5 class="negrito grey-text text-darken-4">Minha conta </h5>
+                </div>
+                <div class="col s12 m12 l12 espaco-m-top-1">
+                    <div class="row">
+                        <div class="col s12">
+                            <table class="striped">
+                                <tbody>
+                                    <tr>
+                                        <td class="negrito">Nome</td>
+                                        <td>{{estudante.nomeCompleto}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="negrito">Tipo documento</td>
+                                        <td>{{estudante.tipoDocumento}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="negrito">Nº documento</td>
+                                        <td>{{estudante.numeroDocumento}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="negrito">Telefone Primário</td>
+                                        <td>{{estudante.telefone1}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="negrito">Telefone Secundário</td>
+                                        <td>{{estudante.telefone2}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="negrito">Tel. Secundário</td>
+                                        <td>{{estudante.telefone2}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="negrito">Email alternativo</td>
+                                        <td>{{estudante.emailAlternativo}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="negrito">Data de inscrição</td>
+                                        <td>{{estudante.dataRegisto}} </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="negrito">Descrição</td>
+                                        <td>{{estudante.breveDescricao}} </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m4 l4 grey lighten-5 borda">
+            <div class="espaco-p-1">
+                <h5 class="grey-text negrito text-darken-3">Minhas avaliações</h5>
+                <p>Classificação dos professores</p>
+
+                <ul>
+                    <li class="espaco-p-2 espaco-m-baixo-1 blue lighten-5 borda-2"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore </a></li>
+                    <li class="espaco-p-2 espaco-m-baixo-1 blue lighten-5 borda-2"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore </a></li>
+                    <li class="espaco-p-2 espaco-m-baixo-1 blue lighten-5 borda-2"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore </a></li>
+                </ul>
+                <a href="" class="">Ver mais dicas</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".owl-carousel").owlCarousel({
+            items: 5,
+            loop: true,
+            margin: 20,
+            nav: true,
+            navText: ["Anterior", "Próximo"],
+            autoplay: true,
+            autoplayTimeout: 2000,
+            dots: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                360: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        });
+    });
+</script>
+
+<!-- Modal Structure -->
+<div id="modalConta" class="modal">
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="modal-content">
+            <h4>Editar detalhes da conta</h4>
+
+            {% csrf_token %} {{form}}
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn white z-depth-0 borda borda-3 negrito red-text text-darken-3 left"><span class="fa fa-times"></span> Fechar</a>
+            <button type="submit" class="waves-effect waves-green btn green darken-2 borda-3 z-depth-0"><span class="fa fa-save"></span> Salvar</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.modal').modal();
+    });
+</script>
+
+{% endblock %}

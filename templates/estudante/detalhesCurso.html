@@ -1,0 +1,220 @@
+{% extends 'base_estudante.html' %}
+{% load static %}
+{% block title %} {{objecto.tituloCurso}} {% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'OwlCarousel/dist/assets/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'OwlCarousel/dist/assets/owl.theme.default.min.css' %}">
+
+<style>
+  .collection{
+    border: none;
+  }
+  .collection .collection-item{
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+    .collection a.collection-item{
+      display: inline-block;
+      font-weight: bold;
+      font-size: 1em;
+      padding: 1em;
+      text-align: center;
+    }
+</style>
+
+<style>
+    .efeito{
+        padding: 10px;
+        transition: 0.3s;
+    }
+    .efeito:hover{
+        background-color: #fff;
+    }
+
+    .borda-card{
+        border: 1px solid #89d0f1;
+    }
+
+    .efeito1{
+        transition: 0.3s all;
+        border-radius: 3px
+    }
+
+    .efeito1:hover{
+        background-color: #ffb30030;
+    }
+
+    span.badge-novo{
+      display: inline-block;
+      min-width: 3rem;
+      padding: 5px;
+      margin-bottom: 3px !important;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 12px;
+      height: 22px;
+      color: #757575;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+    }
+</style>
+
+
+<section class="banner_criar_conta black">
+  <div class="container">
+
+    <div class="row">
+        <div class="col s12 m6 l6">
+          <h4 class="negrito white-text tituloBanner texto-4">{{objecto.tituloCurso}} </h4>
+          <p class="texto-1 white-text">{{objecto.descricao|truncatewords:10}}  </p>
+          <div class="chip amber lighten-3">
+            <img src="{% static 'user.png' %} " alt="perfil">
+            <span class="">Publicado por: <span class="negrito"><a href="{% url 'estudante:perfil-professor' pk=professor.id  %} ">{{objecto.user.first_name}} {{objecto.user.last_name}}</a></span></span>
+          <div class=" espaco-m-top-0">
+          </div> <br>
+            <span class="texto-1 negrito white-text espaco-p-baixo-0">Recomendado para os candidados à:</span> <br>
+          </div>
+          {% if objecto.utanga == True %}
+          <span style="" class="white-text texto-00 badge-novo brown borda-1">Universidade Técnica de Angola</span>
+          {% endif %}
+          {% if objecto.ucan == True %}
+          <span style="" class="white-text texto-00 badge-novo blue borda-1">Universidade Católica de Angola</span>
+          {% endif %}
+          {% if objecto.uan == True %}
+          <span style="" class="white-text texto-00 badge-novo blue darken-4 borda-1">Universidade Agostinho Neto</span>
+          {% endif %}
+        </div>
+
+        <div class="col s12 m6 l4 offset-l2">
+            <div class="card">
+              <div class="card-image">
+                <img src="{% static 'img/white_background.jpg' %}">
+                <!-- <span class="card-title negrito texto-3">3000 KZ</span> -->
+              </div>
+
+              <div class="card-content">
+                <a href="{% url 'estudante:matricula-curso' pk=objecto.id %} " class="btn z-depth-0 btn-large btn-block z-depth-0 fundo-3 negrito borda-3"><i class="fa fa-check-double"></i> Se inscrever</a>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row">
+        <div class="col s12 m12 l12">
+          <div class="card z-depth-0 borda borda-1 amber lighten-5">
+            <div class="card-content">
+              <h5 class="negrito">O que você aprenderá</h5>
+              <div class="row">
+                <div class="col s12 m12 l12 espaco-p-top-1">
+                  <p class="grey-text text-darken-2 negrito-300">
+                    {{objecto.descricao}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+      <div class="row">
+          <div class="col s12 m6 l6">
+            <h5 class="negrito">O instrutor</h5>
+            <h6><a href="#"><span class="texto-uppercase">{{objecto.user.first_name}} {{objecto.user.last_name}}</span></a></h6>
+            <div class="row">
+                <div class="col s12 m3 l3">
+                  <img src="{% static 'user.png' %}" class="responsive-img" alt="">
+                </div>
+                <div class="col s12 m8 l8">
+                  <ul>
+                    <li>4,6 Classificação do instrutor</li>
+                    <li>34.451 Avaliações</li>
+                    <li>84.157 Alunos</li>
+                    <li>19 cursos</li>
+                  </ul>
+                </div>
+                <div class="col s12 m12 l12">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m12 l12">
+          <h5 class="negrito">Comentários</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m8 l8">
+        <ul class="collection sem-borda">
+
+          <li class="collection-item avatar espaco-m-top-1">
+            <img src="{% static 'user.png' %}" alt="" class="circle">
+            <span class="title texto-1 negrito">João Pedro</span>
+            <p class="grey-text text-darken-2 texto-0"> Apartamento </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </li>
+
+          <li class="collection-item avatar espaco-m-top-1">
+            <img src="{% static 'user.png' %}" alt="" class="circle">
+            <span class="title texto-1 negrito">João Pedro</span>
+            <p class="grey-text text-darken-2 texto-0"> Apartamento </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </li>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript" src="{% static 'OwlCarousel/dist/owl.carousel.min.js' %}"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $(".owl-carousel").owlCarousel({
+        items: 5,
+        loop: true,
+        margin: 20,
+        nav: true,
+        navText: ["Anterior", "Próximo"],
+        autoplay: true,
+        autoplayTimeout: 2000,
+        dots: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          360: {
+            items: 3
+          },
+          1000: {
+            items: 5
+          }
+        }
+      });
+  });
+</script>
+
+<script>
+    var elem = document.querySelector('.collapsible.expandable');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
+
+</script>
+
+{% endblock %}

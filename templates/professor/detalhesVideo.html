@@ -1,0 +1,69 @@
+    {% extends 'base_professor.html' %}
+    {% block title %}{{objecto.tituloVideo}}  {% endblock %}
+    {% load static %}
+    {% block content %}
+
+    <style>
+      .altura{
+        min-height: 100vh;
+      }
+    </style>
+
+    <!-- fim banner inicial -->
+
+    <section class="container espaco-m-top-1">
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row altura">
+          <div class="col s12 m12 l8 grey lighten-2 espaco-p-1">
+            <div>
+              {% if objecto.video %}
+              <output>
+                <video width="" height="" poster="" preload="auto" controls style="width: 100%; height:400px; object-fit: contain;">
+                  <source src="{% static objecto.video.url %}" type="video/mp4">
+                    <source src="{% static objecto.video.url %}" type="video/ogg">
+                      <source src="{% static objecto.video.url %}" type="video/webm">
+                        <object data="{% static objecto.video.url %}" type="" height="" width="">
+                          <embed src="{% static objecto.video.url %}" type="swf">
+                          </object>
+                        </video>
+              </output>
+              {% endif %}
+                    </div>
+                    <div>
+                      <label for="">Título de vídeo</label>
+                      <input type="text" name="tituloVideo" id="id_tituloVideo" class="estilo-input browser-default" placeholder="" value="{{objecto.tituloVideo}} ">
+                      <label for="">Descrição</label>
+                      {{form.descricao}}
+                      {{form.video}}
+                    </div>
+                  </div>
+
+                  <div class="col s12 m12 l4">
+                      <a href="{% url 'professor:eliminar-video' pk=objecto.id %} " class="btn red darken-3 right btn-small borda-2 z-depth-1"><span class="fa fa-trash"></span> eliminar vídeo</a>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th class="texto-2">Outros vídeos deste curso</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for item in outrosVideos %}
+                        <tr><td><a href="{% url 'professor:detalhes-video' pk=item.id %} ">{{item.tituloVideo}}</a> </td></tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+        </div>
+
+                <div class="row">
+                  <div class="col s12">
+                    <hr>
+                    <button type="submit" class="btn right blue borda-3">Salvar alterações</button>
+                    <a href="{% url 'professor:detalhes-curso' pk=objecto.curso.id %}" class="right btn z-depth-0 white red-text negrito">Cancelar</a>
+                  </div>
+                </div>
+              </form>
+            </section>
+
+            {% endblock %}

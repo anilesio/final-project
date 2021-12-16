@@ -1,0 +1,163 @@
+        * {
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .month {
+            padding: 70px 25px;
+            width: 100%;
+            background: #ffb300;
+            text-align: center;
+        }
+
+        .month ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .month ul li {
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .month .prev {
+            float: left;
+            padding-top: 10px;
+        }
+
+        .month .next {
+            float: right;
+            padding-top: 10px;
+        }
+
+        .weekdays {
+            margin: 0;
+            padding: 10px 0;
+            background-color: #ddd;
+        }
+
+        .weekdays li {
+            display: inline-block;
+            width: 13.6%;
+            color: #666;
+            text-align: center;
+        }
+
+        .days {
+            padding: 10px 0;
+            background: #eee;
+            margin: 0;
+        }
+
+        .days li {
+            list-style-type: none;
+            display: inline-block;
+            width: 13.6%;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            text-align: center;
+            cursor: default;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .days li:hover {
+            /* background-color: #ffffff;
+            color: #2c2c2c; */
+        }
+
+        .days li .active {
+            padding: 5px;
+            border-radius: 50px;
+            background: #e46969;
+            color: white !important
+        }
+
+        /* Add media queries for smaller screens */
+        @media screen and (max-width:720px) {
+
+            .weekdays li,
+            .days li {
+                width: 13.1%;
+            }
+        }
+
+        @media screen and (max-width: 420px) {
+
+            .weekdays li,
+            .days li {
+                width: 12.5%;
+            }
+
+            .days li .active {
+                padding: 2px;
+            }
+        }
+
+        @media screen and (max-width: 290px) {
+
+            .weekdays li,
+            .days li {
+                width: 12.2%;
+            }
+        }
+
+.hover-top{
+        transition: 0.3s !important;
+    }
+    .hover-top:hover{
+        position: relative;
+        /* bottom: 10px; */
+        transform: scale(1.1);
+    }
+        /* Button used to open the chat form - fixed at the bottom of the page */
+        .open-button {
+            cursor: pointer;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+        }
+
+        /* The popup chat - hidden by default */
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border-radius: 10px 10px 0 0;
+            z-index: 9999;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px !important;
+        }
+
+        /* Full-width textarea */
+        .form-container textarea {
+            width: 100%;
+            resize: none;
+            min-height: 200px;
+        }
+
+        /* When the textarea gets focus, do something */
+        .form-container textarea:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover,
+        .open-button:hover {
+            opacity: 1;
+        }

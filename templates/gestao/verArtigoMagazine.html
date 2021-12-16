@@ -1,0 +1,77 @@
+{% extends 'base_gestao.html' %}
+{% block title %} {{objecto}}  {% endblock %}
+{% block content %}
+{% load static %}
+
+<style>
+    p{
+        line-height: 25pt;
+    }
+</style>
+
+<nav class="white lighten-5 z-depth-0">
+    <div class="container nav-wrapper">
+        <div class="col s12 right">
+            <a href="{% url 'gestaoInterna:magazine-gestao' %} " class="blue-text">Magazine gestão > </a> <a href="{% url 'gestaoInterna:magazine-artigos' pk=objecto.id %} " class="blue-text"> {{objecto.categoria}} > </a> <a class="disabled grey-text">{{objecto.titulo_magazine}} </a>
+        </div>
+    </div>
+</nav>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 right-align espaco-m-baixo-1">
+                {% if objecto.estado == 'Activado' %}
+                <a href="{% url 'gestaoInterna:editar_magazine_artigos' pk=objecto.id %} " class="btn z-depth-0 borda-left-top-2px blue lighten-2">Editar artigo <span class="fa fa-edit"></span> </a>
+                <a href="#modalEliminar" class="modal-trigger borda-right-top-2px btn borda white z-depth-0 red-text text-darken-3">Eliminar artigo <span class="fa fa-trash-alt"></span> </a>
+                {% else %}
+                <a href="{% url 'gestaoInterna:eliminar-magazine' pk=objecto.id %}" class="modal-trigger borda-2 btn borda white z-depth-0 green-text text-darken-3">Restaurar artigo <span class="fa fa-check-double"></span> </a>
+                {% endif %}
+            </div>
+            <div class="col s12 m12 l8 white borda">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div class="card z-depth-0">
+                          <div class="card-content texto-justificado">
+                            <h5 class="negrito grey-text text-darken-2">{{objecto.titulo_magazine}} </h5>
+                            <p>{{objecto.corpo_magazine}} </p>
+                            <hr>
+                            <p><span class="grey-text text-darken-1">{{objecto.user}} </span> <span class="grey-text texto-italic">Atualizado em {{objecto.data_criacao}}</span></p>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col s12 m12 l4">
+                <div class="row">
+    
+                    <div class="col s12 m12 s12">
+                        <h6 class="collection-header negrito grey-text text-darken-2 texto-1">Mais artigos sobre <span class="titulo-4">{{objecto.categoria}}</span> </h6>
+                        <hr>
+                        <div class="collection with-header sem-borda">
+                            {% for item in artigos %}
+                            <a href="{% url 'gestaoInterna:ver-artigo-magazine' pk=item.id %} " class="grey-text text-darken-4 collection-item grey lighten-5"> {{item.titulo_magazine}} </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div id="modalEliminar" class="modal">
+    <div class="modal-content">
+      <h4>Tem certeza que deseja eliminar este artigo?</h4>
+      <a href="{% url 'gestaoInterna:eliminar-magazine' pk=objecto.id %} " class="btn z-depth-0 white red-text text-darken-3">Sim, quero eliminar</a>
+      <a href="#!" class="btn z-depth-0 green modal-close ">Não! Manter artigo</a>
+    </div>
+    
+  </div>
+
+
+<!-- fim conteudo -->
+
+{% endblock %}

@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %} </title>
+    <link rel="stylesheet" href="{% static 'publico/custom/css/estilo-geral.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'materialize/materialize.css' %}">
+    <link rel="stylesheet" href="{% static 'publico/custom/css/temaEscuro.css' %}">
+    <link rel="stylesheet" href="{% static 'publico/fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'publico/icomoon/style.css' %}">
+    <script src="{% static 'materialize/materialize.js' %}"></script>
+    <script src="{% static 'jquery/jquery.js' %}"></script>
+    <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'materialize/materialize.js' %}"></script>
+    <script src="{% static 'custom/js/main.js' %}"></script>
+    <script src="{% static 'notifyjs/notify.js' %} "></script>
+    
+</head>
+
+<body class="light" style="min-height: 100vh;">
+
+    <ul id='dropdown-perfil' class='dropdown-content'>
+        <li><a href="{% url 'estudante:minha-conta' %}" class="grey-text text-darken-1">Minha conta</a></li>
+        <li><a href="{% url 'accounts:logout-user' %} " class="grey-text text-darken-1">Terminar sessão</a></li>
+      </ul>
+
+      <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">one</a></li>
+        <li><a href="#!">two</a></li>
+        <li class="divider" tabindex="-1"></li>
+        <li><a href="#!">three</a></li>
+        <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+        <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+      </ul>
+
+    <div class="navbar-fixed">
+        <nav class="blue lighten-1 z-depth-1" style="">
+            <div class="nav-wrapper container">
+                <a href="{% url 'gestaoInterna:index' %}" class="brand-logo"><img src="{% static 'logo.png' %}" alt="prepare-se" class="responsive-img" style="max-width: 180px ; position: relative; top: 5px;"> </a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger black-text"><i class="fa fa-bars"></i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a class="grey-text text-lighten-3" href="{% url 'gestaoInterna:index' %} ">Painel de controlo <span class="fa fa-home"></span></a></li>
+                    <li><a class='dropdown-trigger grey-text text-lighten-3' href="{% url 'gestaoInterna:magazine-gestao' %} "> Gerir magazine <span class="fa fa-newspaper"></span></a></li>
+                    <li><a class='grey-text text-lighten-3' href=""> Comunicação <span class="fa fa-comments"></span></a></li>
+                    <li><a href="{% url 'gestaoInterna:ajuda_admin' %} " class="grey-text text-lighten-3"> Central de ajuda <span class="fa fa-info-circle"></span></a></li>
+                    <!-- <li><a href="{% url 'gestaoInterna:gestao' %} " class="grey-text text-lighten-3"> Gestão <span class="fa fa-chart-pie"></span></a></li> -->
+                    <li><a href="{% url 'gestaoInterna:erros-reportados' %} " class="grey-text text-lighten-3"> Central de erros <span class="fa fa-flag"></span></a></li>
+                    <!-- <li><a href="{% url 'website:index' %} " class="btn z-depth-0 btn-small blue titulo-0"> Voltar para o website <span class="fa fa-globe"></span></a></li> -->
+                    <li>
+                        <a href="{% url 'accounts:logout-user'%}" class="red darken-3"><span class="fa fa-power-off"></span> {{request.user}} | Terminar sessão </a>
+                        
+                      </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Dropdown Structure -->
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a class="grey-text text-lighten-3" href="{% url 'gestaoInterna:index' %} ">Painel de controlo <i class="fa fa-home"></i></a></li>
+
+        <li><a class="grey-text text-lighten-3" href="">Comunicação <i class="fa fa-comment"></i></a></li>
+        <li><a class="grey-text text-lighten-3" href="">Central de ajuda <i class="fa fa-info-circle"></i></a></li>
+        <li><a class="grey-text text-lighten-3" href="{% url 'gestaoInterna:erros-reportados' %}">Central de erros <i class="fa fa-flag"></i></a></li>
+        <div class="divider"></div>
+        
+        <li><a class="grey-text text-lighten-3" href="{% url 'accounts:logout-user'%}"><i class="fa fa-power-off"></i> Terminar
+        sessão</a></li>
+    </ul>
+
+    <section style="min-height: 100vh;">
+    {% block content %}
+        
+    {% endblock %}
+</section>
+
+
+    <footer class="page-footer white">
+        <div class="container">
+
+        </div>
+        <div class="footer-copyright">
+            <div class="container grey-text text-lighten-3">
+                <a class="grey-text text-lighten-3 center-align center center-block" href="#!">Desenvolvido por Anilésio Xavier</a>
+            </div>
+        </div>
+    </footer>
+
+    {% if messages %}
+    <script>
+        window.onload = function() {
+            { %
+                for message in messages %
+            }
+            $.notify("{{message}}", { %
+                    if message.tags %
+                }
+                "{{ message.tags }}" { % endif %
+                }); { % endfor %
+            }
+        }
+    </script>
+    {% endif %}
+
+    <script>
+        // Or with jQuery
+        $('.dropdown-trigger').dropdown();
+      </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, options);
+        });
+
+        // Or with jQuery
+
+        $(document).ready(function() {
+            $('.sidenav').sidenav();
+        });
+
+        $(".dropdown-trigger").dropdown();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.fixed-action-btn');
+            var instances = M.FloatingActionButton.init(elems, options);
+        });
+
+        // Or with jQuery
+
+        $(document).ready(function() {
+            $('.fixed-action-btn').floatingActionButton();
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.tooltipped');
+            var instances = M.Tooltip.init(elems, options);
+        });
+
+        // Or with jQuery
+
+        $(document).ready(function() {
+            $('.tooltipped').tooltip();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems, options);
+        });
+
+        // Or with jQuery
+
+        $(document).ready(function() {
+            $('.datepicker').datepicker();
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, options);
+        });
+
+        // Or with jQuery
+
+        $(document).ready(function() {
+            $('select').formSelect();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $('.dropdown-trigger').dropdown();
+
+    </script>
+
+    <script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+    </script>
+
+
+</body>
+
+</html>

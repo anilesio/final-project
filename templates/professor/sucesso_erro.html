@@ -1,0 +1,31 @@
+{% extends 'base_professor.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    footer{
+        display: none;
+    }
+</style>
+
+
+<div style="height: 100vh;">
+        <div class="container">
+            <div class="row">
+                <div class="col 12 m8 offset-m2 center center-align">
+                    <div class="espaco-p-top-1">
+                        <h3 class="negrito titulo-1">O seu relatório de erro foi enviado</h3>
+                        <span class="fa fa-file-alt texto-10 titulo-1" ></span>
+                        
+                        <p class="texto-2"><span class="fa fa-info-circle titulo-1"></span> Agradecemos pelo seu contrubo. Através do seu alerta, você e centenas de outros usuários poderão ter uma melhor experiência ao usar a plataforma PLATAFORMA.</p>
+                        <p class="texto-2"><span class="fa fa-info-circle titulo-1"></span> O seu relatório será analisado e posteriormente dado solucionado. Não será notifcado de tal acção.</p>
+                        <p class="texto-2">
+                            Continue a desfrutar da plataforma. <a href="{% url 'professor:index' %}" class="btn z-depth-0 red darken-4 borda-2"><span class="fa fa-key"></span> Voltar área inicial</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock %}

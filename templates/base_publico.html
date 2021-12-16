@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos preparatórios online - aprenda o que quiser, quando quiser | preparese.ao</title>
+    <link rel="stylesheet" href="{% static 'publico/custom/css/estilo-geral.css' %}">
+    <link rel="stylesheet" href="{% static 'publico/custom/css/temaEscuro.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'materialize/materialize.css' %}">
+    <link rel="stylesheet" href="{% static 'publico/fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'publico/icomoon/style.css' %}">
+    <script src="{% static 'jquery/jquery.js' %}"></script>
+    <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'materialize/materialize.js' %}"></script>
+    <script src="{% static 'custom/js/main.js' %}"></script>
+    <script src="{% static 'notifyjs/notify.js' %} "></script>
+</head>
+
+<body class="light" style="min-height: 100vh;">
+
+    <div class="">
+        <nav class="white" style="border-bottom: 1.3px solid #dedede;">
+            <div class="nav-wrapper container">
+                <a href="{% url 'website:index' %}" class="black-text brand-logo">Logo </a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger grey-text text-darken-4"><i
+                        class="fa fa-bars"></i></a>
+
+                <ul class="right hide-on-med-and-down">
+                    <li><a class="grey-text text-darken-4" href="{% url 'website:index' %} ">Início</a></li>
+                    <li><a class="grey-text text-darken-4" href="{% url 'website:magazine' %} ">Blog</a></li>
+                    <!-- <li><a class="grey-text text-darken-4 dropdown-trigger" href="#!" data-target="dropdown-cursos">Cursos oferecidos <span class="fa fa-caret-down"></span></a></li> -->
+                    <li><a class="grey-text text-darken-4 dropdown-trigger" href="{% url 'website:cursos' %} ">Cursos
+                            oferecidos</a></li>
+                    <li><a class="grey-text text-darken-4" href="{% url 'website:sejaProfessor' %}">Ensine na
+                            preparese.ao</a></li>
+                    <li><a class="grey-text text-darken-4" href="{% url 'website:estatisticas' %}">Estatísticas</a></li>
+                    {% if user.is_authenticated %}
+
+
+                    {% if user.is_superuser %}
+                    <li><a href="{% url 'gestaoInterna:index' %} "
+                            class="z-depth-0 btn borda-2 red darken-4 white-text negrito texto-capitalizado">Área
+                            administrativa <span class="fa fa-key"></span></a></li>
+                    {% endif %}
+                    {% else %}
+
+                    <li><a href="{% url 'accounts:user-login' %}"
+                            class="z-depth-0 btn borda-left-top-2px red darken-1 white-text negrito texto-capitalizado"
+                            style="margin-right: 0px;">Fazer login</a></li>
+                    <li><a href="{% url 'accounts:cadastrar-estudante' %}"
+                            class="z-depth-0 btn borda-right-top-2px red darken-4 white-text negrito texto-capitalizado">Inscreve-se</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <ul id="dropdown-cursos" class="dropdown-content">
+        <li><a href="{% url 'website:categorias' %}" class="blue-text text-darken-1">Especialidades</a></li>
+        <li><a href="{% url 'website:cursos' %} " class="blue-text text-darken-1">Todos cursos</a></li>
+    </ul>
+
+    <ul id="dropdown-cursos-mini" class="dropdown-content">
+        <li><a href="{% url 'website:categorias' %}" class="blue-text text-darken-1">Especialidades</a></li>
+        <li><a href="{% url 'website:cursos' %} " class="blue-text text-darken-1">Todos cursos</a></li>
+    </ul>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a class="grey-text text-darken-4" href="{% url 'website:index' %} ">Início</a></li>
+        <li><a class="grey-text text-darken-4" href="{% url 'website:estatisticas' %} ">Estatísticas</a></li>
+        <li><a class="grey-text text-darken-4" href="{% url 'website:magazine' %}">Blog</a></li>
+        <!-- <li><a class="grey-text text-darken-3 dropdown-trigger" href="#!" data-target="dropdown-cursos-mini">Cursos oferecidos <span class="fa fa-caret-down"></span></a></li> -->
+        <li><a class="grey-text text-darken-4" href="{% url 'website:cursos' %} ">Cursos oferecidos </a></li>
+        <li><a class="grey-text text-darken-4" href="{% url 'website:sejaProfessor' %}">Ensine na preparese.ao</a></li>
+
+        <li><a href="{% url 'accounts:user-login' %}"
+                class="z-depth-0 btn borda-1 blue white-text negrito texto-capitalizado">Fazer login</a></li>
+        <li><a href="{% url 'accounts:cadastrar-estudante' %}"
+                class="z-depth-0 btn borda-1 blue white-text negrito texto-capitalizado">Inscreve-se</a></li>
+        <li><a href="{% url 'website:sejaProfessor' %}"
+                class="z-depth-0 btn borda-1 blue white-text negrito texto-capitalizado">Se torne professor</a></li>
+
+        {% if user.is_authenticated %} {% if user.is_superuser %}
+        <li><a href="" class="z-depth-0 btn borda-1 fundo-4 white-text negrito texto-capitalizado">Área
+                administrativa</a></li>
+        {% endif %} {% endif %}
+    </ul>
+
+    {% block content %} {% endblock %}
+
+    <div class="rodape-pub">
+        <div class="row container">
+            <div class="col s12 m12 l12">
+                <p class="texto-2 center-align negrito">A ferramenta que deixa mais perto da tua universidade</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row espaco-p-1 espaco-p-baixo-1 blue-grey" style="margin-bottom: -20px">
+        <div class="col center s12 m6 l6 offset-l3 offset-m3 ">
+            <form method="post">
+                {% csrf_token %}
+                <div class="center">
+                    <h4 class="negrito white-text">Receba todas as novidadades de cursos preparatórios</h4>
+                    <input type="text" class="browser-default estilo-input borda-3" placeholder="Digite o seu email"
+                        name="" value="">
+                    <div class="espaco-m-top-1">
+                        <button type="submit"
+                            class="btn white btn-large negrito grey-text text-darken-4 z-depth-0 borda-3 borda z-depth-1">Assinar
+                            newsllater</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="page-footer grey darken-4">
+        <div class="container">
+            <div class="row espaco-m-top-1">
+
+                <div class="col s12 center">
+                    <img src="{% static 'publico/logo.png' %}" class="responsive-img" style="max-width: 20%;" alt="">
+                </div>
+                <!-- div rodape | footer : ajuda -->
+                <div class="col m6 l3 s12 center-align offset-l2">
+                    <h5 class="grey-text">Sobre nós</h5>
+                    <p class="grey-text text-lighten-4 center-align linha-top-30">Lorem ipsum dolor sit amet,
+                        consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex </p>
+
+                </div>
+
+                <div class="col m6 l2 s12">
+                    <!-- <h6 class="negrito grey-text text-darken-3 texto-uppercase">Sobre</h6> -->
+                    <ul class="linha-top-30 center-align">
+                        <h5 class="grey-text">Conheça-nos</h5>
+                        <!-- <li><a class="grey-text text-lighten-4" href="#!">Como funiona o preparese.ao</a></li> -->
+                        <li><a class="grey-text text-lighten-4" href="#!">Conheça o preparese.ao</a></li>
+                        <li><a class="grey-text text-lighten-4" href="{% url 'website:magazine' %} ">Notícias</a></li>
+                    </ul>
+                </div>
+
+                <!-- div rodape | footer : sobre -->
+                <div class="col m6 l2 s12">
+                    <!-- <h6 class="negrito grey-text text-darken-3 texto-uppercase">Sobre</h6> -->
+                    <ul class="linha-top-30 center-align">
+                        <h5 class="grey-text">Suporte</h5>
+                        <li><a class="grey-text text-lighten-4" href="{% url 'website:ajuda' %}">Central de ajuda</a>
+                        </li>
+                        <li><a class="grey-text text-lighten-4" href="{% url 'website:faqs' %} ">Perguntas
+                                frequentes</a></li>
+                        <li><a class="grey-text text-lighten-4" href="{% url 'website:politica-uso' %} ">Política de
+                                privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div class="center">
+                        <h6 class="grey-text"></h6>
+                        <ul class="list-unstyled social">
+                            <li><a href="#"><span class="fab fa-facebook"></span></a></li>
+                            <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                            <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                            <li><a href="#"><span class="fab fa-linkedin"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row grey">
+                <div class="col s12 center grey-text text-lighten-2">
+                    <h6>
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> preparese.ao, Todos os direitos reservados
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <a class="grey-text text-lighten-3 center-align center center-block" href="#!">Desenvolvido por Anilésio
+                    Xavier</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.slider').slider();
+        });
+    </script>
+
+    <script>
+        $('.dropdown-trigger').dropdown();
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+    </script>
+
+    <!-- <script>
+        window.onload = function () {
+            { % for message in messages %}
+                $.notify("{{message}}", { % if message.tags % }"{{ message.tags }}" { % endif % });
+            { % endfor % }
+        }
+    </script> -->
+
+    <script>
+        window.onload = function() {
+          {% for message in messages %}
+          M.toast({html: {{message}} })
+          {% endfor %}
+        }
+    </script>
+
+</body>
+
+</html>

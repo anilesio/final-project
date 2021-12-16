@@ -1,0 +1,240 @@
+{% extends 'base_gestao.html' %}
+{% block title %} Magazine Gestão {% endblock %}
+{% block content %}
+{% load static %}
+
+<style>
+    body {font-family: Arial;}
+    
+    /* Style the tabNew */
+    .tabNew {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+    }
+    
+    /* Style the buttons inside the tabNew */
+    .tabNew button, a {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+    
+    /* Change background color of buttons on hover */
+    .tabNew button:hover, a:hover  {
+      background-color: #ddd;
+    }
+    
+    /* Create an active/current tabNewlink class */
+    .tabNew button.active {
+      background-color: #ccc;
+    }
+    
+    /* Style the tabNew content */
+    .tabNewcontent {
+        margin-top: 2%;
+      display: none;
+      padding: 6px 12px;
+      -webkit-animation: fadeEffect 1s;
+      animation: fadeEffect 1s;
+    }
+    
+    /* Fade in tabNews */
+    @-webkit-keyframes fadeEffect {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    
+    @keyframes fadeEffect {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    </style>
+
+
+<section class="espaco-m-top-1">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6 l3">
+                <img src="{% static 'user.png' %}" class="responsive-img" alt="">
+            </div>
+
+            <div class="col s12 m6 l9">
+                <div class="espaco-p-top-0">
+                    <h3 class="negrito grey-text">{{objecto.first_name}} {{objecto.last_name}} </h3>
+                    <h6>Professor</h6>
+                    <p><span class="fa fa-envelope"></span> {{objecto.email}}</p>
+                    <p><span class="fa fa-user"></span> {{objecto}}</p>
+                    <p><span class="fa fa-tty"></span> ---</p>
+                    <p><span class="fa fa-star"></span> 2</p>
+                </div>
+            </div>
+        </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="tabNew">
+                    <button class="tabNewlinks" id="defaultOpen" onclick="openCity(event, 'dadosAceso')" >Dados de acesso</button>
+                    <button class="tabNewlinks" onclick="openCity(event, 'dadosPessoais')" >Dados de pessoais</button>
+                    <button class="tabNewlinks" onclick="openCity(event, 'curriculo')" >Currículo do professor</button>
+                    <button class="tabNewlinks" onclick="openCity(event, 'cursosEstudantes')">Docência</button>
+                  </div>
+
+                 
+                  
+                  <div id="dadosAceso" class="tabNewcontent">
+                   <div class="row">
+                    <div class="col s12">
+                        <h6 class="negrito grey lighten-4 espaco-p-1">Dados de acesso</h6>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Primeiro nome</th>
+                                    <th>Último nome</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{objecto.first_name}} </td>
+                                    <td>{{objecto.last_name}} </td>
+                                    <td>{{objecto.email}} </td>
+                                    <td>
+                                        {% if objecto.is_active == False %}
+                                            <span class="badge new red" data-badge-caption="não activo"></span>
+                                        {% else %}
+                                        <span class="badge new green" data-badge-caption="activo"></span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% if objecto.is_active == False %}
+                                <tr>
+                                    <td colspan="6" class="right-align">
+                                        <a href="{% url 'gestaoInterna:estado-user' pk=objecto.id %} " class="btn btn-small green">Activar professor</a>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="6" class="right-align">
+                                        <a href="{% url 'gestaoInterna:estado-user' pk=objecto.id %}" class="btn btn-small red">Desactivar professor</a>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                   </div>
+                  </div>
+
+                  <div class="tabNewcontent" id="dadosPessoais">
+                    <div class="row">
+                        <div class="col s12 m12 l6 espaco-m-top-1">
+                            <h6 class="negrito grey lighten-4 espaco-p-1">Identificação</h6>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nome completo</th>
+                                        <th>Tipo de documento</th>
+                                        <th>Nº documento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{professor.nomeCompleto}} </td>
+                                        <td>{{professor.tipoDocumento}} </td>
+                                        <td>{{professor.numeroDocumento}} </td>
+                                    </tr>
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col s12 m12 l6 espaco-m-top-1">
+                            <h6 class="negrito grey lighten-4 espaco-p-1">Comunicação</h6>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Telefone</th>
+                                        <th>Telefone alternativo</th>
+                                        <th>Email</th>
+                                        <th>Email alternativo</th>
+                                        <th>Morada</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{professor.telefone1}} </td>
+                                        <td>{{professor.telefone2}} </td>
+                                        <td>{{professor.emailAlternativo}} </td>
+                                        <td>{{objecto.email}} </td>
+                                        <td>{{professor.morada}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                  </div>
+                  
+                  <div id="curriculo" class="tabNewcontent">
+
+                    <a href="{% url 'gestaoInterna:cv-professor' pk=objecto.id %}" class="btn blue btn-small"><span class="fa fa-clipboard-list"></span> Ver currículo</a>
+
+                    
+                    
+                  </div>
+                  
+                  <div id="cursosEstudantes" class="tabNewcontent">
+                    <h6 class="grey lighten-4 espaco-p-1 negrito">Curso e aulas <span class="right">Total de cursos {{totalCursos}} </span> </h6>
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Curso</th>
+                                <th>Acção</th>
+                            </tr>
+                        </thead>
+                      
+                        <tbody>
+                            {% for item in cursos %}
+                            <tr>
+                                <td>{{item}} </td>
+                                <td><a href="{% url 'gestaoInterna:professores-gestao-cursdo-detalhes' pk=item.id %} " class="btn green btn-small">Detalhes</a> </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function openCity(evt, cityName) {
+      var i, tabNewcontent, tabNewlinks;
+      tabNewcontent = document.getElementsByClassName("tabNewcontent");
+      for (i = 0; i < tabNewcontent.length; i++) {
+        tabNewcontent[i].style.display = "none";
+      }
+      tabNewlinks = document.getElementsByClassName("tabNewlinks");
+      for (i = 0; i < tabNewlinks.length; i++) {
+        tabNewlinks[i].className = tabNewlinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+
+    }
+    document.getElementById("defaultOpen").click();
+    </script>
+{% endblock %}

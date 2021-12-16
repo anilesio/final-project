@@ -1,0 +1,227 @@
+{% extends 'base_publico.html' %} {% load static %} {% block content %}
+
+<style>
+    .cabecalho_index {
+        margin-top: 0px;
+        padding: 5%;
+        min-height: 40vh;
+        background: url('../../static/img/white_background.jpg') fixed;
+    }
+    
+    .servicos {
+        width: 100px;
+    }
+    
+    .servicos span {
+        color: #b71c1c !important;
+    }
+    
+    .servicos h4 {
+        font-size: 1.5em;
+    }
+    
+    .servicos span {
+        transition: 0.3s;
+        font-size: 4em;
+        text-align: center;
+    }
+</style>
+
+<link rel="stylesheet" href="{% static 'OwlCarousel/dist/assets/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'OwlCarousel/dist/assets/owl.theme.default.min.css' %}">
+
+<div class="cabecalho_index">
+    <h3 class="negrito texto-5 tituloBanner">Variedade de <br> cursos para fazer</h3>
+    <h6 class="texto-2">Aproxima-te mais do próximo passo da sua formação!</h6>
+    <div class="espaco-m-top-1">
+        <a href="{% url 'website:cursos' %} " class="btn red darken-3 negrito borda-3 z-depth-0"><span class="fa fa-play"></span> Veja os cursos disponíveis</a>
+    </div>
+</div>
+
+
+<div class="">
+    <!-- <div class="slider">
+        <ul class="slides">
+
+            <li>
+                <img src="{% static 'img/banner/index-1.jpg' %}" style="filter: brightness(50%);" class="grey darken-3">
+                <div class="caption left-align">
+                    <h3 class="negrito texto-4">Variedade de <br> cursos para fazer</h3>
+                    <h6 class="texto-2">Aproveite diversos temas atuais</h6>
+                    <a href="{% url 'website:cursos' %} " class="btn red borda-3"><span class="fa fa-play"></span> Veja os cursos disponíveis</a>
+                </div>
+            </li>
+
+
+
+
+        </ul>
+    </div> -->
+    <!-- fim banner inicial -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="center center-align espaco-p-1">
+                    <h3 class="negrito">Domine habilidades rapidamente</h3>
+                    <h5>Desenvolva e pratique habilidades que vão te capacitar ao máximo</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="row center center-align center-block text-center container espaco-p-1 ">
+            <div class="col s12 m4 servicos">
+                <span class="fa fa-user-tie"></span>
+                <h4 class="negrito grey-text text-darken-2">Aprenda com os melhores instrutores</h4>
+                <h5 class="grey-text text-darken-3 texto-1 linha-top-30">Assista sob demanda a transmissões de videoaulas de universidades e empresas líderes, como Yale, Google, IBM e muito mais.</h5>
+            </div>
+
+            <div class="col s12 m4 servicos">
+                <span class="fa fa-hand-sparkles"></span>
+                <h4 class="negrito grey-text text-darken-2">Adquira habilidades por meio do aprendizado prático</h4>
+                <h5 class="grey-text text-darken-3 texto-1 linha-top-30">Aprenda habilidades em alta procura em ciência de dados, design, gerenciamento de projetos, marketing digital e muito mais em menos de duas horas com os projetos guiados.</h5>
+            </div>
+
+            <div class="col s12 m4 servicos">
+                <span class="fa fa-medal"> </span>
+                <h4 class="negrito grey-text text-darken-2">Obtenha e compartilhe um certificado de valor</h4>
+                <h5 class="grey-text text-darken-3 texto-1 linha-top-30">Mostre suas novas habilidades com um certificado para cursos, projetos guiados ou certificados profissionais.</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="row">
+                    {% if cursos %} {% for item in cursos %}
+                    <div class="col s12 m12 l3 m3">
+                        <div class="card white z-depth-1">
+                            <div class="card-image">
+                                <a href="{% url 'website:detalhesCurso' pk=item.id %}">
+                      {% if item.thumb %}
+                        <img src="{% static item.thumb.url %}" style="object-fit: cover; height: 200px; filter: brightness(80%);" class="">
+                        {% else %}
+                        <img src="{% static 'favicon.png' %}" style="object-fit: cover; height: 200px;" class="">
+                      {% endif %}
+                    </a>
+                            </div>
+                            <div class="card-content black-text" style="padding: 10px;">
+                                <div class="row" style="margin-top: -10px;">
+                                    <div class="col s12 m12">
+                                        <div class="row">
+                                            <div class="col s12 m12 espaco-m-top-1">
+                                                <span class="texto-uppercase card-title texto-0"> {{item.tituloCurso}} </span>
+                                            </div>
+                                            <div class="col s12 m12">
+                                                <p class="grey-text text-darken-3">
+                                                    {{item.descricao|truncatewords:10}}
+                                                </p>
+                                                <br>
+                                                <div class="chip dropdown-trigger">
+                                                    <img src="{% static 'user.png' %} " alt="perfil" />
+                                                    <a href="{% url 'estudante:perfil-professor' pk=item.user.id %}" class="grey-text text-darken-3">
+                                      por: <span class="negrito">{{item.user.first_name}} {{item.user.last_name}}</span>
+                                    </a>
+                                                </div>
+                                                <a href="{% url 'website:detalhesCurso' pk=item.id %} " class="btn borda-3 green z-depth-1 col s12 toxto-capitalizado" style="margin-top: 30px; margin-bottom: -25px;">Ver detalhes <span class="fa fa-angle-right"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %} {% else %}
+                    <div class="col s12">
+                        <div style="border: 1px solid #89d0f1; padding: 5px;" class="blue borda-3 lighten-5">
+                            <div class="container center-align">
+                                <h5 class="negrito-400"><i class="fa fa-wallet"></i> Nenhum curso registado por enquanto</h5>
+                                <p>Os cursos registados aparecem aqui.</p>
+                                <p>
+                                    <a href="{% url 'professor:novo-curso' %} " class="borda-3 btn green">Comece agora</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h5 class="negrito grey-text text-darken-3">Professores na plataforma</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="owl-carousel owl-theme">
+                {% for item in professores %}
+                <div class="item">
+                    <div class="borda borda-1 hoverable">
+                        <div class="row">
+                            <div class="col s12 m3 l3">
+                                <img src="{% static 'user.png' %}" class="espaco-m-top-2" style="width: 100%;" alt="">
+                            </div>
+                            <div class="col s12 m9 l9">
+                                <h6 class="negrito teal-text">
+                                    <a href="{% url 'website:perfil-professor' pk=item.id %}">{{item.user.first_name}} {{item.user.last_name}}</a>
+                                </h6>
+
+                                <span class="texto-0 negrito">Descrição:</span> {{item.breveDescricao|truncatewords:10}}
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript" src="{% static 'OwlCarousel/dist/owl.carousel.min.js' %}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".owl-carousel").owlCarousel({
+            items: 5,
+            loop: true,
+            margin: 20,
+            nav: true,
+            navText: ["Anterior", "Próximo"],
+            autoplay: true,
+            autoplayTimeout: 2000,
+            dots: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                360: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        });
+    });
+</script>
+
+<script>
+    var elem = document.querySelector('.collapsible.expandable');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
+</script>
+
+{% endblock %}

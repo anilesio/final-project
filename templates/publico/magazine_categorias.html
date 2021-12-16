@@ -1,0 +1,97 @@
+{% extends 'base_publico.html' %} {% block content %} {% load static %}
+
+<style>
+    .d_flex {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    
+    .row_reverse {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+        flex-direction: row-reverse;
+    }
+</style>
+
+<!-- conteudo -->
+<nav class="grey lighten-4 z-depth-0">
+    <div class="container nav-wrapper">
+        <div class="col s12 right">
+            <a class="disabled grey-text texto-1">Notícias </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height: 100vh">
+    <div class="row">
+        <div class="col s12">
+            <h4 class="grey-text text-darken-2 negrito">{{categoria.titulo}} </h4>
+        </div>
+        <div class="col s12 m12 l8">
+            <div class="row">
+
+                {% if artigos %} {% for item in artigos %}
+                <div class="col s12 m6 l6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{% static item.foto.url %}" class="" style="filter: brightness(70%); height: 200px">
+                            <span class="card-title"><a href="{% url 'website:ver_magazine' pk=item.id %}" class="white-text negrito">{{item.titulo_magazine}} </a></span>
+                        </div>
+                        <div class="card-content">
+                            <span class="grey-text text-lighten-1 texto-uppercase" style="font-size: 0.8em;">{{item.data_criacao}} </span> <br>
+                            <a href=""><span class="titulo-4" style="font-size: 1em;">{{item.categoria}} </span></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %} {% else %}
+                <ul class="collection">
+                    <li class="collection-item ">Nada a mostrar</li>
+                </ul>
+                {% endif %}
+
+                <div class="col s12 m12 l12">
+                    <ul class="pagination">
+                        <li class="waves-effect btn-nz-p active">
+                            <a href="#!">
+                                <fa class="fa fa-chevron-left"></fa>
+                            </a>
+                        </li>
+                        <li class="waves-effect btn-nz-p active"><a href="#!">1 de 1</a></li>
+                        <li class="waves-effect btn-nz-p active">
+                            <a href="#!">
+                                <fa class="fa fa-chevron-right"></fa>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m12 l4">
+            <div class="row">
+                <div class="col s12 m12 s12">
+                    <div class="input-field">
+                        <input type="text" id="txt-localizacao" class="col s12 m6 l10 browser-default estilo-input" style="border-radius: 50px 0 0 50px;" placeholder="Pesquise aqui...">
+                    </div>
+                    <div class="input-field">
+                        <button class="btn z-depth-0 btn-nz-p col s12 m6 l2" style="border-radius: 0 50px 50px 0; margin-left: -5px; margin-top: 0px; height: 38px; line-height: 0px;"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="col s12 m12 s12">
+                    <h6 class=" collection-header negrito texto-1">Categorias</h6>
+                    <div class="collection with-header sem-borda">
+                        {% for item in categorias %}
+                        <a href="{% url 'website:magazine_categorias' pk=item.id %}" class="grey-text text-darken-2 grey lighten-5 collection-item">{{item.titulo}} </a> {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- fim conteudo -->
+
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base_anfitriao.html' %}
+{% block title %} Mensagem {% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'publico/css/chat.css' %}">
+<script src="{% static 'publico/js/main.js' %}"></script>
+<style>
+    .open-button {
+        background-color: #ffffff;
+        position: fixed;
+        bottom: 50px;
+        width: 80%;
+        align-items: center;
+        align-content: center;
+    }
+    footer {
+        display: none;
+    }
+
+    body {
+        background-color: #ffffff;
+    }
+
+    #id_mensagem{
+        height: 50px !important;
+    }
+</style>
+
+<div class="row">
+
+    <div class="col s12  l10 offset-l1">
+        <div class="chat-container">
+            <div class="chat-title">
+                <span class="grey-text text-darken-1"><img src="{% static 'user.png' %}" class="circle" style="max-width: 50px;" alt=""> <span style="position: relative; top: -15px; left: 10px;">João Pedro</span> </span>
+                <a href="" class="red-text tooltipped" data-position="left" data-tooltip="Eliminar conversa"><span class="icon-trash"></span></a>
+            </div>
+            <div class="chat-message-list" id="taskList">
+                {% if mensagens %}
+                {% for item in mensagens %}
+                <div class="message-row your-message">
+                    <div class="message-content">
+                        <div class="message-text">{{item.mensagem}} </div>
+                        <div class="message-time"><span class="icon-clock-o"></span> {{item.data_registo}} </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                    <div class="espaco-m-baixo-1">
+                        <h4>Não há mensagens, inicie uma conversa</h4>
+                    </div>
+                {% endif %}
+                <div class="message-row other-message">
+                    <div class="message-content">
+
+                        <div class="message-text">{{texto}} </div>
+                        <div class="message-time"><span class="icon-clock-o"></span> 10/10/2020</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-form" style="z-index: 999;">
+               <form method="POST" id="createTaskForm" data-url="{% url 'anfitriao:enviar_mensagem' %}">
+                   {% csrf_token %}
+                   {{form}}
+                   <button type="button" id="createButton" class="btn"> Enviar</button>
+               </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

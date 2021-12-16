@@ -1,0 +1,87 @@
+{% extends 'base_gestao.html' %} {% block title %} Gestão de anúncios {% endblock %} {% block content %} {% load static %}
+
+<link rel="stylesheet" href="{% static 'amcharts4/examples/javascript/simple-3D-pie-chart/index.css' %}" />
+
+
+<section class="container espaco-m-top-1">
+    <div class="row">
+        <div class="col s12">
+            <h4 class="grey-text text-darken-2 negrito">Estaísticas
+               
+            </h4>
+            <span class="left-align" style="position: relative; top: -20px;"> {{request.user.email}} </span>
+        </div>
+
+        <div class="container">
+
+            <div class="row espaco-p-top-1 ">
+                <div class="col s12 m4 l4">
+                    <div class="espaco-p-1 fundoEscuro borda-2">
+                        <div class="espaco-m-left-1">
+                            <h6 class="">Cursos ministrados</h6>
+                            <div class="borda-titulo-0"></div>
+                            <span class="texto-3"><span class="blue-text">  {{totCursos}} </span> <span class="fa fa-book texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+                            <span class="texto-00"><a href="" class="grey-text">ver todos </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m4 l4">
+                    <div class="espaco-p-1 fundoEscuro borda-2">
+                        <div class="espaco-m-left-1">
+                            <h6 class="">Total de alunos</h6>
+                            <div class="borda-titulo-0"></div>
+                            <span class="texto-3"><span class="blue-text"> {{totEstudantes}} </span> <span class="fa fa-users texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+                            <span class="texto-00"><a href="" class="grey-text">ver todos </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m4 l4">
+                    <div class="espaco-p-1 fundoEscuro borda-2">
+                        <div class="espaco-m-left-1">
+                            <h6 class="">Professores </h6>
+                            <div class="borda-titulo-0"></div>
+                            <span class="texto-3"><span class="blue-text"> {{totProfessor}} </span> <span class="fa fa-user-tie texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+                            <span class="texto-00"><a href="" class="grey-text">ver todos </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <div id="#chartdiv"></div>
+        </div>
+    </div>
+
+</section>
+
+<script src="{% static 'amcharts4/core.js' %}"></script>
+<script src="{% static 'amcharts4/charts.js' %}"></script>
+<script src="{% static 'amcharts4/themes/animated.js' %}"></script>
+
+<script>
+    am4core.useTheme(am4themes_animated);
+    var chart = am4core.create("chartdiv", am4charts.PieChart);
+
+    chart.data = [{
+            "country": "Total de quartos",
+            "litres": 7,
+        },
+    ];
+
+    var series = chart.series.push(new am4charts.PieSeries());
+    series.dataFields.value = "litres";
+    series.dataFields.category = "country";
+
+    // this creates initial animation
+    series.hiddenState.properties.opacity = 1;
+    series.hiddenState.properties.endAngle = -90;
+    series.hiddenState.properties.startAngle = -90;
+
+    chart.legend = new am4charts.Legend();
+</script>
+{% endblock %}

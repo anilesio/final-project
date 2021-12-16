@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %} {% endblock %} Cursos preparatórios online - aprenda o que quiser, quando quiser | PLATAFORMA</title>
+  <link rel="stylesheet" href="{% static 'publico/custom/css/temaEscuro.css' %}">
+  <link rel="stylesheet" href="{% static 'publico/custom/css/estilo-geral.css' %}">
+  <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
+  <link rel="stylesheet" href="{% static 'materialize/materialize.css' %}">
+  <link rel="stylesheet" href="{% static 'publico/fontawesome/css/all.css' %}">
+  <link rel="stylesheet" href="{% static 'publico/icomoon/style.css' %}">
+  <script src="{% static 'jquery/jquery.js' %}"></script>
+  <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
+  <script src="{% static 'materialize/materialize.js' %}"></script>
+  <script src="{% static 'custom/js/main.js' %}"></script>
+  <script src="{% static 'notifyjs/notify.js' %} "></script>
+
+</head>
+
+<body class="light" style="min-height: 100vh;">
+
+  <ul id="lista-curso" class="dropdown-content">
+    <li><a href="{% url 'estudante:categorias' %}" class="blue-text text-darken-1">Especialidades</a></li>
+    <li><a href="{% url 'estudante:cursos' %} " class="blue-text text-darken-1">Todos cursos</a></li>
+  </ul>
+
+  <ul id="lista-curso-mini" class="dropdown-content">
+    <li><a href="{% url 'estudante:categorias' %}" class="blue-text text-darken-1">Especialidades</a></li>
+    <li><a href="{% url 'estudante:cursos' %} " class="blue-text text-darken-1">Todos cursos</a></li>
+  </ul>
+
+  <ul id='dropdown-perfil' class='dropdown-content'>
+    <li><a href="{% url 'estudante:minha-conta' %}" class="grey-text text-darken-1">Minha conta</a></li>
+    <li><a href="{% url 'accounts:logout-user' %} " class="grey-text text-darken-1">Terminar sessão</a></li>
+  </ul>
+
+  <div class="">
+    <nav class="white" style="border-bottom: 1.3px solid #dedede;">
+      <div class="nav-wrapper container">
+        <a href="{% url 'estudante:index' %}" class="black-text brand-logo">Logo </a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger grey-text text-darken-4"><i
+            class="fa fa-bars"></i></a>
+
+        <ul class="right hide-on-med-and-down negrito">
+          <li><a class="grey-text text-darken-4" href="{% url 'estudante:index' %} ">Início</a></li>
+          <li><a class="grey-text text-darken-4" href="{% url 'estudante:cursos' %}">Cursos oferecidos </a></li>
+          <!-- <li><a class="grey-text text-darken-3 dropdown-trigger" href="#!" data-target='lista-curso'>Cursos oferecidos <span class="fa fa-caret-down"></span></a></li> -->
+          <li><a class="grey-text text-darken-4" href="{% url 'estudante:meu-aprendizado' %}">Meu aprendizado</a></li>
+          <!-- <li><a class="grey-text text-darken-4" href="">Galeria</a></li> -->
+          <li><a class="grey-text text-darken-4" href="{% url 'estudante:ajuda' %} ">Ajuda</a></li>
+          <li><a class="grey-text text-darken-4" href="{% url 'chatUser:chat-user' %} ">Caixa de mensagem</a></li>
+
+          <li>
+            <div class="chip dropdown-trigger" data-target='dropdown-perfil'>
+              <img src="{% static 'user.png' %}" alt="perfil">
+              {{request.user.email}} <span class="fa fa-angle-down"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a class="grey-text text-darken-4" href="{% url 'estudante:index' %} ">Início</a></li>
+    <!-- <li><a class="grey-text text-darken-3 dropdown-trigger" href="#!" data-target="lista-curso-mini">Cursos oferecidos <span class="fa fa-caret-down"></span></a></li> -->
+    <li><a class="grey-text text-darken-4" href="{% url 'estudante:cursos' %}">Cursos oferecidos </a></li>
+    <li><a class="grey-text text-darken-4" href="{% url 'estudante:meu-aprendizado' %}">Meu aprendizado</a></li>
+    <!-- <li><a class="grey-text text-darken-4" href="">Galeria</a></li> -->
+		<li><a class="grey-text text-darken-4" href="{% url 'chatUser:chat-user' %} ">Caixa de mensagem</a></li>
+    <li><a class="grey-text text-darken-4" href="{% url 'estudante:ajuda' %}">Ajuda</a></li>
+    <li class="divider"></li>
+    <li><a class="grey-text text-darken-4" href="{% url 'estudante:minha-conta' %} "><span class="fa fa-edit"></span> Minha conta</a></li>
+    <li><a class="grey-text text-darken-4" href="{% url 'accounts:logout-user' %} "><span class="fa fa-power-off"></span> Terminar sessão</a></li>
+
+  </ul>
+
+  <div style="min-height: 100vh;">
+    {% block content %}
+
+    {% endblock %}
+  </div>
+
+  <div class="" style="border-top: 1px solid #dedede">
+    <div class="row container rodape-pub">
+      <div class="col s12 center">
+        <p class="texto-2 negrito">A ferramenta que deixa mais perto da tua universidade</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'jquery/jquery.js' %}"></script>
+  <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
+  <script src="{% static 'materialize/materialize.js' %}"></script>
+  <script src="{% static 'custom/js/main.js' %}"></script>
+  <script src="{% static 'notifyjs/notify.js' %} "></script>
+  <script>
+
+    // Or with jQuery
+
+    $(document).ready(function () {
+      $('.sidenav').sidenav();
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      $('.slider').slider();
+    });
+  </script>
+
+  <script>
+    // Or with jQuery
+    $('.dropdown-trigger').dropdown();
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      $('.collapsible').collapsible();
+    });
+  </script>
+  {% if messages %}
+  <script>
+    window.onload = function () {
+      {% for message in messages %}
+      $.notify("{{message}}", {% if message.tags %} "{{ message.tags }}" {% endif %});
+    {% endfor %}
+        }
+
+
+    $(document).ready(function () {
+      $('.tooltipped').tooltip();
+    });
+
+
+    $(document).ready(function () {
+      $('.modal').modal();
+    });
+
+  </script>
+  {% endif %}
+
+</body>
+
+</html>

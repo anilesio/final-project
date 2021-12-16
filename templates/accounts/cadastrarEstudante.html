@@ -1,0 +1,69 @@
+{% extends 'base_publico.html' %}
+{% block title %} Acessar à conta{% endblock %}
+{% block content %}
+
+  <!-- FORMULÁRIO DE CADASTRO -->
+  <section class="espaco-m-top-1 espaco-m-baixo-1">
+    <div class="container">
+      <div class="row container">
+
+        <div class="col s12 m8 l6 offset-l3 offset-m2">
+          <div class="row">
+            <div class="col s12">
+              <div class="espaco-m-baixo-1">
+                <h6 class="negrito grey-text text-darken-3">Inscreva-se e comece a aprender!</h6>
+              </div>
+                <hr>
+                <p class="grey-text text-darken-2">Temos uma vasta gama de cursos preparatórios à sua espera</p>
+
+            </div>
+          </div>
+          <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row" data-aos="fade-up" data-aos-delay="200">
+              <div class="col s12 m6 l6">
+                <input type="text" class="estilo-input browser-default" placeholder="Primeiro nome" name="first_name" id="id_first_name" required>
+              </div>
+              <div class="col s12 m6 l6">
+                <input type="text" class="estilo-input browser-default" placeholder="Último nome"  name="last_name" id="id_last_name" required>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="200">
+              <div class="col s12 m6 l6">
+                <input type="text" class="estilo-input browser-default" placeholder="Email"  name="email" id="id_email" required>
+              </div>
+              <div class="col s12 m6 l6">
+                <input type="text" class="estilo-input browser-default" placeholder="Username" name="username" id="id_username" required>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="200">
+              <div class="col s12 m6 l6">
+                <input type="password" class="estilo-input browser-default" placeholder="Palavra-passe"name="password1" id="id_password" required>
+              </div>
+              <div class="col s12 m6 l6">
+                <input type="password" class="estilo-input browser-default" placeholder="Por favor repita a palavra-passe" name="password2" id="id_password2" required>
+              </div>
+            </div>
+
+            <div class="row" data-aos="fade-up" data-aos-delay="200">
+              <div class="col s12 m12 l12">
+                  <div class="espaco-m-top-0">
+                    <button type="submit" class="btn green large col s12 z-depth-1 borda-3 texto-capitalizado"> <span class="fa fa-check-double"></span> Criar conta</button>
+                  </div>
+              </div>
+            </div>
+
+            <hr>
+            <div class="row">
+              <div class="col s12">
+                <p class="center"> <span class="">Já possui uma conta? <a href="{% url 'accounts:user-login' %}">Acesse uma aqui</a></span></p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- FORMULÁRIO DE CADASTRO -->
+
+{% endblock %}

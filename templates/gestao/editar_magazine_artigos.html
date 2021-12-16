@@ -1,0 +1,63 @@
+{% extends 'base_gestao.html' %}
+{% block title %} Magazine Gestão {% endblock %}
+{% block content %}
+{% load static %}
+
+<nav class="white z-depth-0">
+    <div class="container nav-wrapper">
+        <div class="col s12 right">
+            <a class="disabled grey-text">Magazine gestão </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <h4 class="grey-text text-darken-2 negrito">Editar artigo  </h4>
+        <h5>{{objecto.titulo_magazine}} </h5>
+        
+        <div class="col s12 m12 l12">
+            <div class="row">
+                <div class="col s12 m6">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="espaco-m-baixo-1">
+                            <div class="row">
+                                <div class="col s12">
+                                    <label for="">Título magazine</label>
+                                    {{form.titulo_magazine}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <label for="">Corpo da notícia</label>
+                                    {{form.corpo_magazine}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m6 l6">
+                                    <label for="">Categoria</label>
+                                    {{form.categoria}}
+                                </div>
+
+                                <div class="col s12 m6 l6">
+                                    <label for="">Importância da notícia</label>
+                                    {{form.importancia}}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s12">
+                                    {{form.foto}}
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn borda-2 blue z-depth-0">Actualizar <span class="fa fa-save"></span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends 'base_publico.html' %} {% load static %} {% block content %}
+
+<!-- fim banner inicial -->
+
+<style>
+    .estrela1:nth-child(n+2):hover {
+        color: #ffeb3b;
+    }
+</style>
+
+<section>
+    <div class="container">
+        <div class="row espaco-m-top-0">
+            <div class="col s12 m5 l5">
+                <img src="{% static 'user.png' %}" style="max-width: 15%;" alt="">
+                <h4 class="negrito grey-text text-darken-3">{{professor.user.first_name}} {{professor.user.last_name}} </h4>
+                <h6 class="negrito grey-text text-darken-3">{{professor.user.email}} </h6>
+
+            </div>
+            <div class="col s12 m7 l7">
+                <div class="row espaco-p-top-1 ">
+                    <div class="col s12 m12 l12">
+                        <div class="espaco-p-1 fundoEscuro borda-2">
+                            <div class="espaco-m-left-1">
+                                <h6 class="">Cursos publicados</h6>
+                                <div class="borda-titulo-0"></div>
+                                <span class="texto-3"><span class="blue-text">{{totCursos}} </span> <span class="fa fa-book texto-2 opacity-03 right" style="top: -30px; position: relative; object-fit: cover;"></span> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <h5 class="negrito">Sobre mim</h5>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, corporis totam? Consequatur harum aspernatur, voluptate a sit vel id ipsa quo, nihil molestias unde cumque odio, iste provident repellat reprehenderit.
+            </p>
+        </div>
+        <hr>
+    </div>
+</section>
+
+
+<div class="container espaco-m-top-0">
+    <div class="row">
+        <div class="col s12 m7 l7">
+            <div class="row">
+                <div class="col s12 m12 l12 ">
+                    <h5 class="negrito grey-text text-darken-4">Dados do professor </h5>
+                </div>
+                <div class="col s12 m12 l12 espaco-m-top-1">
+                    <div class="row">
+                        <div class="col s12">
+                            <table class="striped">
+                                <tbody>
+                                    <tr>
+                                        <td class="negrito">Nome</td>
+                                        <td>{{professor.nomeCompleto}} </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td class="negrito">Telefone</td>
+                                        <td>{{professor.telefone1}} <br> {{professor.telefone2}} </td>
+
+                                    </tr>
+
+
+                                    <tr>
+                                        <td class="negrito">Email</td>
+                                        <td>{{professor.emailAlternativo}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="negrito">Data de inscrição</td>
+                                        <td>{{professor.dataRegisto}} </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m5 l5 grey lighten-5 borda">
+            <div class="espaco-p-1">
+                <h5 class="grey-text negrito text-darken-3">O que os alunos dizem sobre o professor</h5>
+
+                <ul>
+                    <li class="espaco-p-1 espaco-m-baixo-1 blue blue-text lighten-5 borda-2">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore <br>
+                        <div class="chip">
+                            <img src="{% static 'user.png' %}" alt=""> dfsd
+                        </div>
+                    </li>
+                </ul>
+                <a href="" class="">Ver mais dicas</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% if cursosProfessor %} {% for item in cursosProfessor %}
+        <div class="col s12 m12 l3 m3">
+            <div class="card white z-depth-1 borda-1">
+                <div class="card-image">
+                    <img src="{% if item.thumb %} {% static item.thumb.url %} {% else %} {% static 'foto.png' %} {% endif %} " style="object-fit: cover; height: 200px;" class="">
+                    <span class="texto-uppercase card-title" style="font-size: 8pt; font-weight: bold; background-color: #e04050; padding: 3px; margin-bottom: 10px; border-radius: 0 3px 3px 0;">{{item.user.first_name}} {{item.user.last_name}}</span>
+                </div>
+                <div class="card-content black-text" style="padding: 10px;">
+                    <div class="row" style="margin-top: -10px;">
+                        <div class="col s12 m12">
+                            <div class="row">
+                                <div class="col s12 m12">
+                                    <span class="negrito green-text"> {{item.tituloCurso}} </span><br>
+
+                                </div>
+                                <div class="col s12 m12">
+                                    {{item.descricao|truncatewords:10}}
+                                    <a href="{% url 'estudante:detalhes-curso' pk=item.id %} " class="btn borda-3 fundo-4 z-depth-0 col s12 toxto-capitalizado" style="margin-top: 30px; margin-bottom: -25px;">Ver detalhes <span class="fa fa-angle-right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %} {% else %}
+        <div class="col s12">
+            <div style="border: 1px solid #89d0f1; padding: 5px;" class="blue borda-3 lighten-5">
+                <div class="container center-align">
+                    <h5 class="negrito-400"><i class="fa fa-wallet"></i> Nenhum curso registado por enquanto</h5>
+                    <p>Os cursos registados aparecem aqui.</p>
+                    <p>
+                        <a href="{% url 'professor:novo-curso' %} " class="modal-trigger btn green">Novo curso</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modalConta" class="modal">
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="modal-content">
+            <h4>Quantas estrelas dá ao professor?</h4>
+
+
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn white z-depth-0 borda borda-3 negrito red-text text-darken-3"><span class="fa fa-times"></span> Fechar</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.modal').modal();
+    });
+</script>
+
+{% endblock %}

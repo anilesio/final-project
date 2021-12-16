@@ -1,0 +1,50 @@
+{% extends 'base_estudante.html' %}
+{% block title %} Reportar erro {% endblock %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+  <div class="row container" style="margin-top: 3em;">
+    <div class="">
+      <h4 class="grey-text text-darken-2 negrito">Reportar um erro</h4>
+    </div>
+ 
+    <div class="col s12 m12 l10" style="margin-top: 2em;">
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr><th><label for="id_tipo_erro"><sup class="red-text">*</sup> Tipo erro:</label>
+        </th><td>
+          
+          <select name="tipo_erro" class="estilo-input browser-default" placeholder="Título do magazine" required id="id_tipo_erro">
+          <option value="" selected>---------</option>
+          <option value="Anúncios">Anúncios</option>
+          <option value="Mensagens">Mensagens</option>
+          <option value="Upload de fotos">Upload de fotos</option>
+          <option value="Meu perfil">Meu perfil</option>
+          <option value="Central de ajuda">Central de ajuda</option>
+          </select>
+        </td></tr>
+          <tr>
+            <th>
+              <label for="id_mensagem"><sup class="red-text">*</sup> Mensagem:</label></th><td>
+            <textarea name="mensagem" rows="10" placeholder="Descreva aqui o que aconteceu, sem esquecer dos detalhes. Toda informação é importante para a compreensão do problema." class="estilo-input browser-default" required id="id_mensagem"></textarea>
+        </td></tr>
+          <tr><th><label for="id_anexo_foto"><sup class="red-text">*</sup> Anexo foto:</label></th><td><input type="file" name="anexo_foto" class="estilo-input browser-default" accept="image/*" id="id_anexo_foto"></td></tr>
+          <input type="submit" class="btn z-depth-0 borda-2 fundo-5 white-text" value="Enviar mensagem">
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $('.dropdown-trigger').dropdown();
+</script>
+
+{% endblock %}

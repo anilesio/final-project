@@ -1,0 +1,31 @@
+button{
+  background-color:yellow;
+}
+
+button:hover{background-color:orange;}
+
+button:focus{background-color:red;}
+
+a {
+  color: orange;
+}
+
+a.button{
+  color:green;
+  text-decoration: none;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:active {
+  color: blue;
+}
+<button>
+Hover and Click!
+</button>
+<br><br>
+
+<a href="#">Hello</a><br><br>
+<a class="button" href="#">Bye</a>

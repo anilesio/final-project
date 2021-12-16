@@ -1,0 +1,31 @@
+{% extends 'base_publico.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    footer{
+        display: none;
+    }
+</style>
+
+
+<div style="height: 100vh;">
+        <div class="container">
+            <div class="row">
+                <div class="col 12 m8 offset-m2 center center-align">
+                    <div class="espaco-p-top-2">
+                        
+                        <span class="fa fa-check texto-10 green-text" ></span>
+                        <h3 class="negrito green-text">O registo foi feito com sucesso</h3>
+                        <p class="texto-2 green-text"> Agradecemos pelo seu interesse.</p>
+                        <p class="texto-2"><span class="fa fa-info-circle green-text"></span> O seu cadastro encontra-se neste momento em avaliação, prometemos ser breve. O resultado será enviado no seu email.</p>
+                        <p class="texto-2">
+                            Continue a desfrutar da plataforma. <br> <a href="{% url 'website:index' %}" class="btn z-depth-0 green"><span class="fa fa-home"></span> Voltar área inicial</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock %}

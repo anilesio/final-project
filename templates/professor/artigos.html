@@ -1,0 +1,56 @@
+{% extends 'base_professor.html' %}
+{% block content %}
+{% load static %}
+
+<nav class="grey lighten-5 z-depth-0">
+    <div class="container nav-wrapper">
+        <div class="col s12 right">
+            <a class="grey-text">{{objecto.titulo}} </a>
+
+        </div>
+    </div>
+</nav>
+
+<!-- conteudo -->
+<section>
+    <div class="container">
+        <div class="row espaco-m-top-1">
+            <div class="center col s12 m12 l8 offset-l2">
+                <h3 class="grey-text text-darken-2 negrito">Clique em um artigo</h3>
+                <span class=" sem-negrito center">(página {{artigos.number}}  de {{artigos.paginator.num_pages}}) </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <div class="collection">
+                    {% if artigos %}
+                    {% for item in artigos %}
+                    <a href="{% url 'professor:ver-artigo' pk=item.id %} " class="collection-item grey-text text-darken-4">{{item.titulo}} </a>
+                    {% endfor %}
+                    {% else %}
+                    <p class="sem-borda disabled center collection-item">Nenhum artigo a mostrar</p>
+                    {% endif %}
+                </div>
+
+                <ul class="pagination center-block center center-align">
+                    {% if artigos.has_previous %}
+                        <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{artigos.previous_page_number}}"><span class="fa fa-chevron-left"></span> Retroceder</a></li>
+                        {% endif %}
+                        
+                        {% if artigos.has_next %}
+                        <li class="active fundo-3 waves-effect waves-light"><a href="?pagina={{artigos.next_page_number}}">Ver mais  <span class="fa fa-chevron-right"></span></a></li>
+                        {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a href="{% url 'professor:reportar-erro' %} " class="btnAnimacao btn borda-3 hoverable z-depth-1 blue btn-large darken-1 open-button btn modal-trigger">
+    <i class="fa fa-cog"></i>
+    <span style="position: relative; top: -7%; left: 3%;">Reportar erro</span>
+</a>
+
+
+<!-- fim conteudo -->
+{% endblock %}
